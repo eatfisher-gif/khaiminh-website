@@ -210,6 +210,7 @@
       ].join("\n");
 
       const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       try {
         window.location.href = mailtoUrl;
       } catch (_) {
@@ -226,13 +227,43 @@
       }
 
       status.classList.add("success");
-      status.textContent = "已嘗試開啟 Email 草稿；若未自動開啟，請點連結手動開啟。";
-      const manualLink = document.createElement("a");
-      manualLink.href = mailtoUrl;
-      manualLink.textContent = "手動開啟 Email 草稿";
-      manualLink.style.marginLeft = "8px";
-      manualLink.style.textDecoration = "underline";
-      status.appendChild(manualLink);
+      status.textContent = "已嘗試開啟 Email 草稿。若沒有反應，請使用下方按鈕：";
+
+      const mailtoLink = document.createElement("a");
+      mailtoLink.href = mailtoUrl;
+      mailtoLink.textContent = "手動開啟 Email";
+      mailtoLink.style.marginLeft = "8px";
+      mailtoLink.style.textDecoration = "underline";
+
+      const gmailLink = document.createElement("a");
+      gmailLink.href = gmailUrl;
+      gmailLink.target = "_blank";
+      gmailLink.rel = "noopener";
+      gmailLink.textContent = "開 Gmail 草稿";
+      gmailLink.style.marginLeft = "12px";
+      gmailLink.style.textDecoration = "underline";
+
+      const copyButton = document.createElement("button");
+      copyButton.type = "button";
+      copyButton.textContent = "複製詢價內容";
+      copyButton.style.marginLeft = "12px";
+      copyButton.style.border = "1px solid #bfa87a";
+      copyButton.style.background = "#fff";
+      copyButton.style.padding = "4px 8px";
+      copyButton.style.cursor = "pointer";
+      copyButton.addEventListener("click", async () => {
+        const text = `To: ${recipient}\nSubject: ${subject}\n\n${body}`;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyButton.textContent = "已複製";
+        } catch (_) {
+          copyButton.textContent = "複製失敗";
+        }
+      });
+
+      status.appendChild(mailtoLink);
+      status.appendChild(gmailLink);
+      status.appendChild(copyButton);
     });
   }
 })();
