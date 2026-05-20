@@ -206,11 +206,28 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
     linear-gradient(135deg, rgba(21, 56, 82, .92), rgba(217, 168, 79, .22)),
     repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0 1px, transparent 1px 34px);
 }
+.case-surface .case-image,
+.case-valve .case-image {
+  background-size: cover;
+  background-position: center;
+}
+.case-surface .case-image {
+  background-image: linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("../img/cases/surface-treatment/553460.jpg");
+}
+.case-valve .case-image {
+  background-image: linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("../img/cases/valve-repair/553462.jpg");
+}
 .case-image::before,
 .case-image::after {
   content: "";
   position: absolute;
   border: 1px solid rgba(255,255,255,.45);
+}
+.case-surface .case-image::before,
+.case-surface .case-image::after,
+.case-valve .case-image::before,
+.case-valve .case-image::after {
+  display: none;
 }
 .case-surface .case-image::before {
   left: 14%;
