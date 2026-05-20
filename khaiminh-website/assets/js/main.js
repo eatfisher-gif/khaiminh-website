@@ -73,6 +73,7 @@
       let index = 0;
       const images = [];
       const imageSet = new Set();
+      const stepSize = 4;
 
       function parseImagePath(path) {
         const match = path.match(/^(.*\/)(\d+)(\.[a-zA-Z0-9]+)$/);
@@ -113,9 +114,23 @@
       }
 
       function render() {
-        const imagePath = images[index];
-        if (!imagePath) return;
-        node.style.backgroundImage = `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("${imagePath}")`;
+        if (!images.length) return;
+        const picks = [
+          images[index % images.length],
+          images[(index + 1) % images.length],
+          images[(index + 2) % images.length],
+          images[(index + 3) % images.length]
+        ];
+        node.style.backgroundImage = [
+          `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28))`,
+          `url("${picks[0]}")`,
+          `url("${picks[1]}")`,
+          `url("${picks[2]}")`,
+          `url("${picks[3]}")`
+        ].join(", ");
+        node.style.backgroundSize = "100% 100%, 50% 50%, 50% 50%, 50% 50%, 50% 50%";
+        node.style.backgroundPosition = "center, left top, right top, left bottom, right bottom";
+        node.style.backgroundRepeat = "no-repeat";
         node.setAttribute("aria-label", `${prefix} ${index + 1}`);
       }
 
@@ -124,14 +139,14 @@
 
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
-          index = (index - 1 + images.length) % images.length;
+          index = (index - stepSize + images.length) % images.length;
           render();
         });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", () => {
-          index = (index + 1) % images.length;
+          index = (index + stepSize) % images.length;
           render();
         });
       }
