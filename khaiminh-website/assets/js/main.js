@@ -232,13 +232,7 @@
       }
 
       status.classList.add("success");
-      status.textContent = "已嘗試開啟 Email 與 Gmail 草稿。若沒有反應，請使用下方按鈕：";
-
-      const mailtoLink = document.createElement("a");
-      mailtoLink.href = mailtoUrl;
-      mailtoLink.textContent = "手動開啟 Email";
-      mailtoLink.style.marginLeft = "8px";
-      mailtoLink.style.textDecoration = "underline";
+      status.textContent = "已嘗試開啟 Gmail 草稿。若沒有反應，請使用下方按鈕：";
 
       const gmailLink = document.createElement("a");
       gmailLink.href = gmailUrl;
@@ -266,7 +260,6 @@
         }
       });
 
-      status.appendChild(mailtoLink);
       status.appendChild(gmailLink);
       status.appendChild(copyButton);
     });
