@@ -1,329 +1,386 @@
+/* ============================================
+   KHAI MINH GROUP — 互動邏輯
+   ============================================
+   * 行動選單展開
+   * 詢價單 stepper 隨捲動高亮
+   * 拖曳上傳 + 檔案列表 + 大小驗證
+   * 表單欄位驗證
+   * Formspree 送出 (通知 Email: khaiminhgroup11668@gmail.com)
+   ============================================ */
+
 (function () {
-  const nav = document.querySelector("[data-nav]");
-  const navToggle = document.querySelector("[data-nav-toggle]");
-  const floating = document.querySelector("[data-floating-contact]");
-  const form = document.querySelector("[data-quote-form]");
-  const status = document.querySelector("[data-form-status]");
-  const config = window.KHAI_MINH_CONFIG || {};
-  if (config.phoneHref && !config.phoneHrefTel) config.phoneHrefTel = `tel:${config.phoneHref}`;
-  if (config.email && !config.emailMailto) config.emailMailto = `mailto:${config.email}`;
+  'use strict';
 
-  function applyConfig() {
-    document.querySelectorAll("[data-config]").forEach((node) => {
-      const key = node.dataset.config;
-      const value = config[key];
-      if (typeof value === "string") node.textContent = value;
-    });
+  /* ============== 設定 ============== */
+  // ⚠ 上線前換成你的 Formspree endpoint
+  // 取得方式：https://formspree.io → New Form → 拿到 https://formspree.io/f/xxxxxxxx
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
 
-    document.querySelectorAll("[data-config-href]").forEach((node) => {
-      const key = node.dataset.configHref;
-      const value = config[key];
-      if (typeof value === "string") node.setAttribute("href", value);
-    });
+  const MAX_FILE_SIZE = 25 * 1024 * 1024;  // 25 MB
+  const MAX_FILES = 5;
+  const ALLOWED_EXT = ['pdf', 'dwg', 'dxf', 'jpg', 'jpeg', 'png', 'zip', 'step', 'stp', 'igs'];
 
-    document.querySelectorAll("[data-config-value]").forEach((node) => {
-      const key = node.dataset.configValue;
-      const value = config[key];
-      if (typeof value === "string") node.setAttribute("value", value);
-    });
-
-    document.querySelectorAll("[data-config-recipient]").forEach((node) => {
-      if (config.email) node.dataset.recipient = config.email;
-    });
+  /* ============== 共用：i18n 文字取用 ============== */
+  function t(key, fallback) {
+    if (!window.KM_i18n) return fallback || key;
+    const dict = window.KM_i18n.getDict();
+    const val = key.split('.').reduce((a, k) => (a == null ? a : a[k]), dict);
+    return (typeof val === 'string') ? val : (fallback || key);
   }
 
-  applyConfig();
+  /* ============== 1. 行動選單 ============== */
+  function initMobileMenu() {
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav');
+    if (!toggle || !nav) return;
 
-  if (navToggle && nav) {
-    navToggle.addEventListener("click", () => nav.classList.toggle("open"));
-  }
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+    });
 
-  function updateFloatingContact() {
-    if (!floating) return;
-    const scrolled = window.scrollY > 280;
-    const nearBottom = window.innerHeight + window.scrollY > document.body.offsetHeight - 520;
-    floating.classList.toggle("visible", scrolled || nearBottom);
-  }
-
-  window.addEventListener("scroll", updateFloatingContact, { passive: true });
-  window.addEventListener("resize", updateFloatingContact);
-  updateFloatingContact();
-
-  async function loadCaseManifest() {
-    try {
-      const response = await fetch("assets/case-manifest.json", { cache: "no-store" });
-      if (!response.ok) return {};
-      const payload = await response.json();
-      return payload && typeof payload === "object" ? payload : {};
-    } catch (_) {
-      return {};
-    }
-  }
-
-  async function initCaseCarousels() {
-    const manifest = await loadCaseManifest();
-    const carousels = document.querySelectorAll("[data-case-carousel]");
-    carousels.forEach(async (node) => {
-      const carouselKey = node.dataset.caseCarousel || "";
-      const manifestImages = Array.isArray(manifest?.[carouselKey]?.images) ? manifest[carouselKey].images : [];
-      const dataImages = (node.dataset.caseImages || "").split(",").map((item) => String(item).trim()).filter(Boolean);
-      const preferredImages = manifestImages.length ? manifestImages : dataImages;
-
-      const prefix = node.dataset.caseAltPrefix || "Case photo";
-      let index = 0;
-      const images = [];
-      const imageSet = new Set();
-      const stepSize = 4;
-
-      function parseImagePath(path) {
-        const match = path.match(/^(.*\/)(\d+)(\.[a-zA-Z0-9]+)$/);
-        if (!match) return null;
-        return { dir: match[1], number: Number(match[2]), ext: match[3] };
-      }
-
-      function canLoadImage(path) {
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => resolve(true);
-          img.onerror = () => resolve(false);
-          img.src = `${path}?v=${Date.now()}`;
-        });
-      }
-
-      async function pushLoadableImages(candidateList) {
-        for (const path of candidateList) {
-          if (!path || imageSet.has(path)) continue;
-          const ok = await canLoadImage(path);
-          if (!ok) continue;
-          imageSet.add(path);
-          images.push(path);
-        }
-      }
-
-      async function discoverSequentialImages() {
-        const last = parseImagePath(images[images.length - 1]);
-        if (!last) return;
-        for (let step = 1; step <= 20; step += 1) {
-          const candidate = `${last.dir}${last.number + step}${last.ext}`;
-          if (imageSet.has(candidate)) continue;
-          const ok = await canLoadImage(candidate);
-          if (!ok) break;
-          imageSet.add(candidate);
-          images.push(candidate);
-        }
-      }
-
-      function render() {
-        if (!images.length) return;
-        const picks = [
-          images[index % images.length],
-          images[(index + 1) % images.length],
-          images[(index + 2) % images.length],
-          images[(index + 3) % images.length]
-        ];
-        node.style.backgroundImage = [
-          `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28))`,
-          `url("${picks[0]}")`,
-          `url("${picks[1]}")`,
-          `url("${picks[2]}")`,
-          `url("${picks[3]}")`
-        ].join(", ");
-        node.style.backgroundSize = "100% 100%, 50% 50%, 50% 50%, 50% 50%, 50% 50%";
-        node.style.backgroundPosition = "center, left top, right top, left bottom, right bottom";
-        node.style.backgroundRepeat = "no-repeat";
-        node.setAttribute("aria-label", `${prefix} ${index + 1}`);
-      }
-
-      const prevBtn = node.querySelector("[data-case-prev]");
-      const nextBtn = node.querySelector("[data-case-next]");
-
-      if (prevBtn) {
-        prevBtn.addEventListener("click", () => {
-          index = (index - stepSize + images.length) % images.length;
-          render();
-        });
-      }
-
-      if (nextBtn) {
-        nextBtn.addEventListener("click", () => {
-          index = (index + stepSize) % images.length;
-          render();
-        });
-      }
-
-      await pushLoadableImages(preferredImages);
-      if (!images.length && preferredImages !== dataImages) {
-        await pushLoadableImages(dataImages);
-      }
-      if (!images.length) return;
-
-      render();
-      await discoverSequentialImages();
+    // 點選單項目後自動收起
+    nav.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
     });
   }
 
-  initCaseCarousels();
+  /* ============== 2. 詢價單 stepper 隨捲動高亮 ============== */
+  function initFormStepper() {
+    const sections = document.querySelectorAll('.form-section[data-section]');
+    const steps = document.querySelectorAll('.fs-step[data-step]');
+    if (!sections.length || !steps.length) return;
 
-  function initMaterialNoteField() {
-    if (!form) return;
-    const materialSelect = form.querySelector('select[name="material"]');
-    const materialNoteWrap = form.querySelector("[data-material-note-wrap]");
-    const materialNoteInput = form.querySelector('[name="material_note"]');
-    if (!materialSelect || !materialNoteWrap || !materialNoteInput) return;
-
-    function toggleMaterialNote() {
-      const selectedOption = materialSelect.options[materialSelect.selectedIndex];
-      const selectedValue = (materialSelect.value || "").toLowerCase();
-      const selectedText = selectedOption ? selectedOption.textContent.trim() : "";
-      const isOtherOrUnsure =
-        selectedValue === "other_unsure" ||
-        selectedText.includes("其他") ||
-        selectedText.includes("不確定");
-      const shouldShow = materialSelect.value !== "";
-
-      materialNoteWrap.hidden = !shouldShow;
-      materialNoteInput.required = false;
-      if (isOtherOrUnsure && shouldShow) materialNoteInput.focus();
-    }
-
-    materialSelect.addEventListener("change", toggleMaterialNote);
-    toggleMaterialNote();
-  }
-
-  initMaterialNoteField();
-
-  if (form && status) {
-    const handleQuoteSubmit = (event) => {
-      if (event) event.preventDefault();
-      const required = Array.from(form.querySelectorAll("[required]"));
-      const missing = required.find((field) => !String(field.value).trim());
-      const serviceChecked = form.querySelectorAll('input[name="services"]:checked').length > 0;
-      status.className = "form-status";
-
-      if (!serviceChecked) {
-        status.textContent = "請至少選擇一項服務。";
-        form.querySelector('[name="services"]').focus();
-        return;
-      }
-
-      if (missing) {
-        status.textContent = "請先填寫必填欄位。";
-        missing.focus();
-        return;
-      }
-
-      const data = new FormData(form);
-      const recipient = form.dataset.recipient || config.email || "khaiminhgroup11668@gmail.com";
-      const subject = `Khai Minh Quote Request - ${data.get("name") || ""}`;
-      const attachments = data.getAll("attachment")
-        .filter((file) => file && file.name)
-        .map((file) => file.name);
-      const services = data.getAll("services").join(", ");
-      const preferred = data.get("preferred_contact") || "-";
-      const siteVisit = data.get("site_visit") || "不需要";
-      const body = [
-        "Khai Minh Website Quote Request",
-        "",
-        "[Service]",
-        `Selected services: ${services}`,
-        `Process: ${data.get("process") || "-"}`,
-        `Material: ${data.get("material") || "-"}`,
-        `Material note: ${data.get("material_note") || "-"}`,
-        `Part size: ${data.get("part_size") || "-"}`,
-        `Quantity: ${data.get("quantity") || "-"} ${data.get("quantity_unit") || ""}`,
-        `Frequency: ${data.get("frequency") || "-"}`,
-        `Deadline: ${data.get("deadline") || "-"}`,
-        "",
-        "[Specification]",
-        data.get("message") || "",
-        "",
-        "[Attachment]",
-        `File names: ${attachments.length ? attachments.join(", ") : "-"}`,
-        "Please attach drawings/photos to this email before sending if needed.",
-        "",
-        "[Contact]",
-        `Name: ${data.get("name") || ""}`,
-        `Title: ${data.get("title") || "-"}`,
-        `Company: ${data.get("company") || ""}`,
-        `Industry: ${data.get("industry") || "-"}`,
-        `Phone / Zalo: ${data.get("phone") || ""}`,
-        `Email: ${data.get("email") || ""}`,
-        `Location: ${data.get("location") || "-"}`,
-        `Preferred contact: ${preferred}`,
-        `Factory visit: ${siteVisit}`
-      ].join("\n");
-
-      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      try {
-        window.location.href = mailtoUrl;
-      } catch (_) {
-        try {
-          const tempLink = document.createElement("a");
-          tempLink.href = mailtoUrl;
-          tempLink.style.display = "none";
-          document.body.appendChild(tempLink);
-          tempLink.click();
-          tempLink.remove();
-        } catch (_) {
-          // Keep manual link fallback below.
-        }
-      }
-      try {
-        window.open(gmailUrl, "_blank", "noopener");
-      } catch (_) {
-        // Keep fallback below.
-      }
-      // Force a guaranteed action even when popup/mail client is blocked:
-      // redirect current tab to Gmail compose as final fallback.
-      setTimeout(() => {
-        try {
-          window.location.assign(gmailUrl);
-        } catch (_) {
-          // Keep status links as last resort.
-        }
-      }, 300);
-
-      status.classList.add("success");
-      status.textContent = "已嘗試開啟 Gmail 草稿。若沒有反應，請使用下方按鈕：";
-
-      const gmailLink = document.createElement("a");
-      gmailLink.href = gmailUrl;
-      gmailLink.target = "_blank";
-      gmailLink.rel = "noopener";
-      gmailLink.textContent = "開 Gmail 草稿";
-      gmailLink.style.marginLeft = "12px";
-      gmailLink.style.textDecoration = "underline";
-
-      const copyButton = document.createElement("button");
-      copyButton.type = "button";
-      copyButton.textContent = "複製詢價內容";
-      copyButton.style.marginLeft = "12px";
-      copyButton.style.border = "1px solid #bfa87a";
-      copyButton.style.background = "#fff";
-      copyButton.style.padding = "4px 8px";
-      copyButton.style.cursor = "pointer";
-      copyButton.addEventListener("click", async () => {
-        const text = `To: ${recipient}\nSubject: ${subject}\n\n${body}`;
-        try {
-          await navigator.clipboard.writeText(text);
-          copyButton.textContent = "已複製";
-        } catch (_) {
-          copyButton.textContent = "複製失敗";
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const sectionNum = entry.target.getAttribute('data-section');
+          steps.forEach(s => {
+            s.classList.toggle('active', s.getAttribute('data-step') === sectionNum);
+          });
         }
       });
+    }, { rootMargin: '-30% 0px -55% 0px', threshold: 0 });
 
-      status.appendChild(gmailLink);
-      status.appendChild(copyButton);
+    sections.forEach(sec => observer.observe(sec));
+
+    // 點 stepper 跳轉到對應 section
+    steps.forEach(step => {
+      step.style.cursor = 'pointer';
+      step.addEventListener('click', () => {
+        const n = step.getAttribute('data-step');
+        const target = document.querySelector(`.form-section[data-section="${n}"]`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }
+
+  /* ============== 3. 檔案上傳 ============== */
+  function initFileUpload() {
+    const zone = document.getElementById('uploadZone');
+    const input = document.getElementById('fileInput');
+    const list = document.getElementById('fileList');
+    if (!zone || !input || !list) return;
+
+    // 我們自己管理檔案 (因為 input.files 不可直接刪除)
+    const selectedFiles = [];
+
+    function renderList() {
+      list.innerHTML = '';
+      if (!selectedFiles.length) return;
+
+      selectedFiles.forEach((file, idx) => {
+        const row = document.createElement('div');
+        row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:9px 12px; background:#fff; border:0.5px solid var(--color-line); font-size:12px; margin-bottom:6px;';
+        row.innerHTML = `
+          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:75%;">
+            <strong>${escapeHtml(file.name)}</strong>
+            <span style="color:var(--color-text-muted); margin-left:6px;">${formatSize(file.size)}</span>
+          </span>
+          <button type="button" data-idx="${idx}" style="color:#C8503E; font-size:11px;">×</button>
+        `;
+        list.appendChild(row);
+      });
+
+      list.querySelectorAll('button[data-idx]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const i = parseInt(btn.getAttribute('data-idx'), 10);
+          selectedFiles.splice(i, 1);
+          syncInput();
+          renderList();
+        });
+      });
+    }
+
+    function syncInput() {
+      // 把 selectedFiles 同步回 <input type="file">
+      const dt = new DataTransfer();
+      selectedFiles.forEach(f => dt.items.add(f));
+      input.files = dt.files;
+    }
+
+    function addFiles(fileList) {
+      const incoming = Array.from(fileList);
+      for (const f of incoming) {
+        if (selectedFiles.length >= MAX_FILES) {
+          alert(`最多 ${MAX_FILES} 個檔案 / Max ${MAX_FILES} files`);
+          break;
+        }
+        const ext = (f.name.split('.').pop() || '').toLowerCase();
+        if (!ALLOWED_EXT.includes(ext)) {
+          alert(`不支援的檔案格式：${f.name}`);
+          continue;
+        }
+        if (f.size > MAX_FILE_SIZE) {
+          alert(`檔案過大 (>25MB)：${f.name}`);
+          continue;
+        }
+        selectedFiles.push(f);
+      }
+      syncInput();
+      renderList();
+    }
+
+    zone.addEventListener('click', () => input.click());
+
+    input.addEventListener('change', (e) => {
+      addFiles(e.target.files);
+    });
+
+    // 拖曳
+    ['dragenter', 'dragover'].forEach(ev => {
+      zone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        zone.style.borderColor = 'var(--color-accent)';
+      });
+    });
+    ['dragleave', 'drop'].forEach(ev => {
+      zone.addEventListener(ev, (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        zone.style.borderColor = '';
+      });
+    });
+    zone.addEventListener('drop', (e) => {
+      if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
+    });
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
+  }
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, c => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    }[c]));
+  }
+
+  function buildMailtoUrl(fd, services) {
+    const recipient = 'khaiminhgroup11668@gmail.com';
+    const subject = 'Khai Minh Quote Request';
+    const fieldLabels = {
+      name: 'Name',
+      company: 'Company',
+      phone: 'Phone',
+      email: 'Email',
+      material: 'Material',
+      quantity: 'Quantity',
+      deadline: 'Deadline',
+      note: 'Notes',
+      message: 'Message'
     };
+    const lines = [
+      'Khai Minh Website Quote Request',
+      '',
+      `Services: ${services || '-'}`,
+    ];
 
-    form.addEventListener("submit", handleQuoteSubmit);
-
-    const submitButton = form.querySelector(".quote-submit");
-    if (submitButton) {
-      submitButton.addEventListener("click", (event) => {
-        handleQuoteSubmit(event);
-      });
+    for (const [key, value] of fd.entries()) {
+      if (key.startsWith('_') || key === 'services[]') continue;
+      if (value instanceof File) {
+        if (value.name) lines.push(`File: ${value.name} (${formatSize(value.size)})`);
+        continue;
+      }
+      const text = String(value || '').trim();
+      if (!text) continue;
+      lines.push(`${fieldLabels[key] || key}: ${text}`);
     }
+
+    lines.push('', `Source: ${window.location.href}`);
+    return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join('\n'))}`;
+  }
+
+  /* ============== 4. 表單驗證 + Formspree 送出 ============== */
+  function initQuoteForm() {
+    const form = document.getElementById('quoteForm');
+    if (!form) return;
+
+    const submitBtn = document.getElementById('submitBtn');
+    const success = document.getElementById('formSuccess');
+
+    function setFieldError(field, hasError) {
+      const wrap = field.closest('.form-field');
+      if (wrap) wrap.classList.toggle('has-error', !!hasError);
+    }
+
+    function validateEmail(v) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+    }
+
+    function validatePhone(v) {
+      // 允許 +、數字、空白、橫線、括號；至少 7 個數字
+      const digits = (v.match(/\d/g) || []).length;
+      return digits >= 7 && /^[+\d\s\-().]+$/.test(v);
+    }
+
+    function validate() {
+      let ok = true;
+
+      // 服務至少選 1 項
+      const services = form.querySelectorAll('input[name="services[]"]:checked');
+      const servicesError = document.getElementById('services-error');
+      if (services.length === 0) {
+        if (servicesError) servicesError.style.display = 'block';
+        ok = false;
+      } else {
+        if (servicesError) servicesError.style.display = 'none';
+      }
+
+      // 必填欄位
+      ['name', 'company'].forEach(n => {
+        const f = form.querySelector(`[name="${n}"]`);
+        if (!f) return;
+        const empty = !f.value.trim();
+        setFieldError(f, empty);
+        if (empty) ok = false;
+      });
+
+      // Email 格式
+      const emailF = form.querySelector('[name="email"]');
+      if (emailF) {
+        const bad = !validateEmail(emailF.value.trim());
+        setFieldError(emailF, bad);
+        if (bad) ok = false;
+      }
+
+      // 電話格式
+      const phoneF = form.querySelector('[name="phone"]');
+      if (phoneF) {
+        const bad = !validatePhone(phoneF.value.trim());
+        setFieldError(phoneF, bad);
+        if (bad) ok = false;
+      }
+
+      return ok;
+    }
+
+    // 即時清除錯誤狀態
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+      el.addEventListener('input', () => setFieldError(el, false));
+      el.addEventListener('change', () => setFieldError(el, false));
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validate()) {
+        // 捲動到第一個錯誤
+        const firstErr = form.querySelector('.has-error, #services-error[style*="block"]');
+        if (firstErr) firstErr.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      // 準備送出
+      const originalText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>${escapeHtml(t('validation.sending', '傳送中...'))}</span>`;
+
+      const fd = new FormData(form);
+
+      // 把多選 services 合併成可讀字串（方便 Email 通知顯示）
+      const services = Array.from(form.querySelectorAll('input[name="services[]"]:checked'))
+        .map(c => c.value).join(', ');
+      fd.append('_services_summary', services);
+
+      // 加上來源資訊
+      fd.append('_subject', '【開明集團】新詢價單 / New Quote Request');
+      fd.append('_language', (window.KM_i18n && window.KM_i18n.getLang()) || 'tw');
+      fd.append('_source_url', window.location.href);
+      fd.append('_submitted_at', new Date().toISOString());
+
+      if (FORMSPREE_ENDPOINT.includes('YOUR_FORM_ID')) {
+        window.location.href = buildMailtoUrl(fd, services);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+        return;
+      }
+
+      try {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: fd,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          document.querySelector('.submit-row').style.display = 'none';
+          if (success) {
+            success.classList.add('show');
+            success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        } else {
+          const data = await res.json().catch(() => ({}));
+          const msg = data.error || data.errors?.[0]?.message || t('validation.send_failed', '送出失敗，請稍後再試');
+          alert(msg);
+        }
+      } catch (err) {
+        console.error(err);
+        alert(t('validation.send_failed', '送出失敗，請稍後再試或直接致電 0908 421 410'));
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    });
+  }
+
+  /* ============== 5. 平滑捲動到錨點 ============== */
+  function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const id = link.getAttribute('href');
+        // 同頁面錨點才接管
+        if (id.length > 1) {
+          const target = document.querySelector(id);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  }
+
+  /* ============== 啟動 ============== */
+  function init() {
+    initMobileMenu();
+    initFormStepper();
+    initFileUpload();
+    initQuoteForm();
+    initSmoothScroll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();

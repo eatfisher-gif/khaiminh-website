@@ -1,67 +1,426 @@
-<!doctype html>
-<html lang="zh-Hant" data-page="service">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="開明集團表面處理服務示範：電鍍、鍍鉻、噴砂、研磨、拋光、噴塗與橡膠包覆。">
-  <title>服務項目 | 開明集團 KHAI MINH</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="開明集團表面處理服務 — 8 大製程、月處理量 50 噸、48 小時急件、SOP + 檢驗報告 + 製程照片完整品管文件。">
+  <meta name="theme-color" content="#1A3A52">
+  <title>表面處理服務 | 開明集團 Khai Minh Group</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect fill='%231A3A52' width='38' height='38'/%3E%3Ctext x='50%25' y='50%25' fill='%23D4A857' font-family='serif' font-size='18' text-anchor='middle' dominant-baseline='central'%3E開%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="Khai Minh"><span class="brand-mark">開</span><span><strong data-i18n="brand.name">開明集團</strong><small data-config="companyName">KHAI MINH GROUP</small></span></a>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-label="Menu"><span></span><span></span><span></span></button>
-    <nav class="site-nav" data-nav>
-      <a href="index.html#about" data-i18n="nav.about">關於</a>
-      <a href="service.html" data-i18n="nav.services">服務</a>
-      <a href="index.html#solutions" data-i18n="nav.solutions">方案</a>
-      <a href="index.html#cases" data-i18n="nav.cases">實績</a>
-      <a href="index.html#news" data-i18n="nav.news">動態</a>
-      <div class="language-switcher"><button type="button" data-lang="tw">繁中</button><button type="button" data-lang="vn">VN</button><button type="button" data-lang="en">EN</button></div>
-      <a class="btn btn-gold" href="quote.html" data-i18n="nav.quote">詢價</a>
-    </nav>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">開</div>
+        <div class="logo-text">
+          <strong data-i18n="site_name">開明集團</strong>
+          <span data-i18n="site_name_en">KHAI MINH GROUP</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="index.html#about" data-i18n="nav.about">關於</a>
+        <a href="service.html" class="active" data-i18n="nav.services">服務</a>
+        <a href="index.html#industries" data-i18n="nav.solutions">方案</a>
+        <a href="index.html#projects" data-i18n="nav.works">實績</a>
+        <a href="index.html#news" data-i18n="nav.news">動態</a>
+        <a href="quote.html" data-i18n="nav.contact">詢價</a>
+      </nav>
+
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="tw">繁中</button>
+        <button type="button" data-lang="vn">VN</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+
+      <a href="quote.html" class="btn-primary" data-i18n="btn.quote_now">線上見積依頼</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section class="page-hero service-hero">
-      <p class="eyebrow"><span></span><b data-i18n="service.chapter">第貳章 · SERVICE</b></p>
-      <h1 data-i18n="service.title">表面處理示範與工業支援服務</h1>
-      <p data-i18n="service.subtitle">依材質、用途、耐磨耐蝕需求，協助選擇合適製程並安排取送件、加工與檢查。</p>
-    </section>
+  <!-- ==================== BREADCRUMB ==================== -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="index.html" data-i18n="service_page.breadcrumb_home">首頁</a>
+      <span class="sep">/</span>
+      <a href="service.html" data-i18n="service_page.breadcrumb_services">服務項目</a>
+      <span class="sep">/</span>
+      <span class="current" data-i18n="service_page.breadcrumb_current">表面處理</span>
+    </div>
+  </nav>
 
-    <section class="section demo-layout">
-      <div class="demo-visual">
-        <div class="sample before"><span data-i18n="service.before">處理前</span></div>
-        <div class="sample after"><span data-i18n="service.after">處理後</span></div>
-      </div>
-      <div class="copy-stack">
-        <p class="section-kicker" data-i18n="service.surfaceKicker">表面處理</p>
-        <h2 data-i18n="service.surfaceTitle">從除鏽、粗化、鍍層到防護塗裝。</h2>
-        <p data-i18n="service.surfaceText">適用於機械零件、治具、管件、閥件、滾輪與工廠維修件。可依零件狀況評估噴砂、研磨、鍍鉻、電鍍、噴塗或橡膠包覆。</p>
-        <ul class="check-list">
-          <li data-i18n="service.check1">協助確認基材、尺寸公差與表面粗度要求</li>
-          <li data-i18n="service.check2">可處理單件維修、小批量與長期配合案件</li>
-          <li data-i18n="service.check3">可搭配機加工、閥件維修與設備改造</li>
-        </ul>
-      </div>
-    </section>
+  <!-- ==================== SERVICE HERO ==================== -->
+  <section class="service-hero">
+    <div class="container">
+      <div class="service-hero-grid">
+        <div>
+          <div class="chapter" style="color:#D4A857;" data-i18n="service_page.hero_label">SERVICE 01 / 06</div>
+          <h1 data-i18n="service_page.hero_title">表面處理</h1>
+          <div class="vn" data-i18n="service_page.hero_vn">Xử lý bề mặt · Surface Treatment</div>
+          <div class="bar-3" style="margin-bottom: 20px;">
+            <div style="background:#D4A857;"></div>
+            <div style="background:rgba(255,255,255,0.5);"></div>
+            <div style="background:rgba(255,255,255,0.25);"></div>
+          </div>
+          <p class="desc" data-i18n="service_page.hero_desc">從電子零件、機車零件到工業機台，我們提供 8 大類表面處理製程，月處理量 50 噸以上。提供 SOP、檢驗報告、製程照片三項標準文件，讓台商品管能完整追溯每一批工單。</p>
+          <div style="margin-top: 24px; display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="quote.html" class="btn-primary" data-i18n="btn.quote">線上詢價</a>
+            <a href="#workflow" class="btn-secondary" style="border-color:rgba(255,255,255,0.4); color:white;" data-i18n="btn.learn_more">了解更多</a>
+          </div>
+        </div>
 
-    <section class="section">
-      <p class="section-kicker" data-i18n="service.allKicker">完整服務</p>
-      <div class="service-list">
-        <div><strong data-i18n="services.surface.title">表面處理</strong><p data-i18n="services.surface.desc">電鍍、鍍鉻、噴砂、研磨、拋光、噴塗、橡膠包覆</p></div>
-        <div><strong data-i18n="services.machining.title">精密機加工</strong><p data-i18n="services.machining.desc">銑削、車削、刨削、磨削、CNC 訂製</p></div>
-        <div><strong data-i18n="services.mechanical.title">機械工程</strong><p data-i18n="services.mechanical.desc">電力、給排水、空壓系統施工</p></div>
-        <div><strong data-i18n="services.valve.title">閥件維修</strong><p data-i18n="services.valve.desc">氣閥、水閥、液壓閥買賣與維修</p></div>
-        <div><strong data-i18n="services.trade.title">進出口貿易</strong><p data-i18n="services.trade.desc">機械設備代購、關務與物流協調</p></div>
-        <div><strong><a href="https://www.sanjai-pump.com.tw/" target="_blank" rel="noopener">代理產品</a></strong><p><a href="https://www.sanjai-pump.com.tw/" target="_blank" rel="noopener">SANJAI 全系列新品與維修包、維修服務</a><br><a href="https://zh-tw.buenoeco.com/vietnam-plant-casting-foundry" target="_blank" rel="noopener">BUENO 越南鑄造廠服務</a></p></div>
+        <div class="quick-facts">
+          <div class="quick-facts-title" data-i18n="service_page.qf_title">QUICK FACTS</div>
+          <div class="qf-row">
+            <span class="label" data-i18n="service_page.qf_1_label">月產能</span>
+            <span class="value" data-i18n="service_page.qf_1_value">50 噸</span>
+          </div>
+          <div class="qf-row">
+            <span class="label" data-i18n="service_page.qf_2_label">最快交期</span>
+            <span class="value" data-i18n="service_page.qf_2_value">48 小時</span>
+          </div>
+          <div class="qf-row">
+            <span class="label" data-i18n="service_page.qf_3_label">最大尺寸</span>
+            <span class="value" data-i18n="service_page.qf_3_value">1.5m × 3m</span>
+          </div>
+          <div class="qf-row">
+            <span class="label" data-i18n="service_page.qf_4_label">品管文件</span>
+            <span class="value" data-i18n="service_page.qf_4_value">SOP / 報告 / 照片</span>
+          </div>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
 
-  <footer class="site-footer"><div><strong data-i18n="brand.name">開明集團</strong><p><span data-config="companyName">KHAI MINH GROUP</span> · MST <span data-config="taxCode">3604066672</span></p></div><div><a href="tel:+84908421410" data-config-href="phoneHrefTel" data-config="phoneDisplay">0908 421 410</a><a href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto" data-config="email">khaiminhgroup11668@gmail.com</a></div></footer>
-  <div class="floating-contact" data-floating-contact><a class="zalo" href="https://zalo.me/84908421410" data-config-href="zaloUrl" target="_blank" rel="noopener">Zalo</a><a class="phone" href="tel:+84908421410" data-config-href="phoneHrefTel" data-i18n="contact.phoneShort">電話</a><a class="email" href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto">Email</a></div>
-  <script src="assets/js/config.js"></script>
+  <!-- ==================== PROCESSES ==================== -->
+  <section class="section section-light" id="processes">
+    <div class="container">
+      <div class="section-header">
+        <div class="chapter" data-i18n="service_page.processes_chapter">第 壱 章 · PROCESSES</div>
+        <h2 class="section-title" data-i18n="service_page.processes_title">8 大製程，按需選擇</h2>
+        <p class="text-muted" style="font-size:13px; margin-top:8px;" data-i18n="service_page.processes_sub">點選製程，看詳細規格與適用場景</p>
+      </div>
+
+      <div class="processes-grid">
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="6" width="16" height="12" rx="1"/>
+            <path d="M8 6V4M16 6V4M4 10h16M4 14h16"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_1">電鍍</div>
+          <div class="process-vn" data-i18n="service_page.proc_1_vn">Mạ điện</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8"/>
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 4v3M12 17v3M4 12h3M17 12h3"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_2">鍍鉻</div>
+          <div class="process-vn" data-i18n="service_page.proc_2_vn">Mạ crom</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 17l4-4 4 4 4-6 6 6"/>
+            <circle cx="7" cy="6" r="1"/>
+            <circle cx="13" cy="9" r="1"/>
+            <circle cx="19" cy="5" r="1"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_3">噴砂</div>
+          <div class="process-vn" data-i18n="service_page.proc_3_vn">Phun cát</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 19c0-7 3-12 7-12s7 5 7 12"/>
+            <path d="M10 15h4M9 19h6"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_4">噴塗</div>
+          <div class="process-vn" data-i18n="service_page.proc_4_vn">Phun sơn</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="8"/>
+            <path d="M8 12l8 0M12 8l0 8"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_5">研磨</div>
+          <div class="process-vn" data-i18n="service_page.proc_5_vn">Mài</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 17l5-5M9 12l4 4M13 16l8-8"/>
+            <circle cx="20" cy="6" r="2"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_6">拋光</div>
+          <div class="process-vn" data-i18n="service_page.proc_6_vn">Đánh bóng</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="9" width="18" height="6" rx="3"/>
+            <circle cx="12" cy="12" r="1.5"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_7">橡膠包輥</div>
+          <div class="process-vn" data-i18n="service_page.proc_7_vn">Bọc cao su</div>
+        </div>
+
+        <div class="process-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="8" width="16" height="8" rx="1"/>
+            <circle cx="9" cy="12" r="2"/>
+            <circle cx="15" cy="12" r="2"/>
+          </svg>
+          <div class="process-name" data-i18n="service_page.proc_8">內孔加工</div>
+          <div class="process-vn" data-i18n="service_page.proc_8_vn">Gia công trong</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== WORKFLOW ==================== -->
+  <section class="section section-white" id="workflow">
+    <div class="container">
+      <div class="section-header">
+        <div class="chapter" data-i18n="service_page.workflow_chapter">第 弐 章 · PROCESS FLOW</div>
+        <h2 class="section-title" data-i18n="service_page.workflow_title">標準作業流程</h2>
+      </div>
+
+      <div class="workflow">
+        <div class="workflow-step">
+          <div class="workflow-step-num">壱</div>
+          <div class="workflow-step-name" data-i18n="service_page.workflow_1_name">收件 + 圖面確認</div>
+          <div class="workflow-step-desc" data-i18n="service_page.workflow_1_desc">中文工程師對接</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">弐</div>
+          <div class="workflow-step-name" data-i18n="service_page.workflow_2_name">前處理</div>
+          <div class="workflow-step-desc" data-i18n="service_page.workflow_2_desc">除油 / 除銹 / 酸洗</div>
+        </div>
+        <div class="workflow-step highlight">
+          <div class="workflow-step-num">参</div>
+          <div class="workflow-step-name" data-i18n="service_page.workflow_3_name">主製程</div>
+          <div class="workflow-step-desc" data-i18n="service_page.workflow_3_desc">電鍍 / 噴砂 / 研磨</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">四</div>
+          <div class="workflow-step-name" data-i18n="service_page.workflow_4_name">品檢 + 報告</div>
+          <div class="workflow-step-desc" data-i18n="service_page.workflow_4_desc">膜厚 / 鹽霧 / 外觀</div>
+        </div>
+        <div class="workflow-step">
+          <div class="workflow-step-num">伍</div>
+          <div class="workflow-step-name" data-i18n="service_page.workflow_5_name">包裝 + 出貨</div>
+          <div class="workflow-step-desc" data-i18n="service_page.workflow_5_desc">同奈直送 / 報關</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EQUIPMENT ==================== -->
+  <section class="section section-light" id="equipment">
+    <div class="container">
+      <div class="section-header">
+        <div class="chapter" data-i18n="service_page.equip_chapter">第 三 章 · EQUIPMENT</div>
+        <h2 class="section-title" data-i18n="service_page.equip_title">廠房設備清單</h2>
+      </div>
+
+      <div style="overflow-x: auto;">
+        <table class="equipment-table">
+          <thead>
+            <tr>
+              <th data-i18n="service_page.equip_col_1">設備名稱</th>
+              <th data-i18n="service_page.equip_col_2">規格</th>
+              <th data-i18n="service_page.equip_col_3">數量</th>
+              <th data-i18n="service_page.equip_col_4">用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CNC 加工中心</td>
+              <td>1500 × 3000 mm · X/Y/Z 3 軸</td>
+              <td>2</td>
+              <td>大件精密銑削</td>
+            </tr>
+            <tr>
+              <td>立式車床</td>
+              <td>φ800 × 1200 mm</td>
+              <td>3</td>
+              <td>圓柱件車削加工</td>
+            </tr>
+            <tr>
+              <td>電鍍生產線</td>
+              <td>2000L × 5 槽</td>
+              <td>1</td>
+              <td>鍍鉻 / 鍍鋅 / 鍍鎳</td>
+            </tr>
+            <tr>
+              <td>自動噴砂機</td>
+              <td>1.5 × 2.0 m 工作室</td>
+              <td>2</td>
+              <td>表面前處理 / 紋路</td>
+            </tr>
+            <tr>
+              <td>橡膠硫化烘箱</td>
+              <td>2.0 × 3.0 m 內徑</td>
+              <td>1</td>
+              <td>橡膠輥套包覆</td>
+            </tr>
+            <tr>
+              <td>膜厚測試儀 (Fischer)</td>
+              <td>0.1–500 μm</td>
+              <td>2</td>
+              <td>鍍層品質驗收</td>
+            </tr>
+            <tr>
+              <td>鹽霧試驗箱</td>
+              <td>108 L · 35°C ± 1</td>
+              <td>1</td>
+              <td>耐蝕性測試</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== QUALITY ASSURANCE ==================== -->
+  <section class="section section-white" id="qa">
+    <div class="container">
+      <div class="section-header">
+        <div class="chapter" data-i18n="service_page.qa_chapter">第 四 章 · QUALITY ASSURANCE</div>
+        <h2 class="section-title" data-i18n="service_page.qa_title">每批工單，三份文件</h2>
+      </div>
+
+      <div class="qa-grid">
+        <div class="qa-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+            <path d="M14 2v6h6M8 13h8M8 17h8M8 9h2"/>
+          </svg>
+          <h3 class="qa-title" data-i18n="service_page.qa_1_title">作業 SOP</h3>
+          <p class="qa-desc" data-i18n="service_page.qa_1_desc">每批工單依客戶圖面建立 SOP，膜厚 / 溫度 / 時間皆有書面紀錄</p>
+        </div>
+
+        <div class="qa-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+          <h3 class="qa-title" data-i18n="service_page.qa_2_title">檢驗報告</h3>
+          <p class="qa-desc" data-i18n="service_page.qa_2_desc">膜厚計、鹽霧測試、附著力測試，提供中越雙語報告</p>
+        </div>
+
+        <div class="qa-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="7" width="18" height="13" rx="2"/>
+            <circle cx="12" cy="13" r="3.5"/>
+            <path d="M9 7l1.5-3h3L15 7"/>
+          </svg>
+          <h3 class="qa-title" data-i18n="service_page.qa_3_title">製程照片</h3>
+          <p class="qa-desc" data-i18n="service_page.qa_3_desc">前處理、製程中、成品三階段拍照，雲端連結隨工單交付</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FINAL CTA ==================== -->
+  <section class="section section-dark">
+    <div class="container">
+      <div style="text-align:center; max-width:600px; margin:0 auto;">
+        <h2 class="section-title" data-i18n="service_page.final_cta_title">需要表面處理？</h2>
+        <p style="color:rgba(255,255,255,0.7); font-size:14px; line-height:2; margin:18px 0 28px;" data-i18n="service_page.final_cta_desc">告訴我們您的零件圖面與處理要求，工程師團隊將於 24 小時內回覆報價</p>
+        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+          <a href="quote.html" class="btn-primary" style="padding:14px 28px;" data-i18n="btn.quote_now">線上見積依頼</a>
+          <a href="tel:+84908421410" class="btn-secondary" style="border-color:rgba(255,255,255,0.4); color:white; padding:14px 28px;">📞 0908 421 410</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-mark">開</div>
+            <div class="logo-text">
+              <strong style="color:white" data-i18n="site_name">開明集團</strong>
+              <span data-i18n="site_name_en">KHAI MINH GROUP</span>
+            </div>
+          </div>
+          <strong data-i18n="footer.company_full">CÔNG TY TNHH CƠ KHÍ TM & SX KHAI MINH GROUP</strong>
+          <p>
+            <span data-i18n="footer.address">Đồng Áp 1-3, tổ 9, ấp 3, xã Phước Thái, tỉnh Đồng Nai</span><br>
+            <span data-i18n="footer.tax_id">MST: 3604066672</span><br>
+            TEL: <a href="tel:+84908421410">0908 421 410</a><br>
+            EMAIL: <a href="mailto:khaiminhgroup11668@gmail.com">khaiminhgroup11668@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_services">服務</h4>
+          <a href="service.html" data-i18n="home.service_1_name">表面處理</a>
+          <a href="service.html" data-i18n="home.service_2_name">精密機加工</a>
+          <a href="service.html" data-i18n="home.service_3_name">機械工程</a>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_company">公司</h4>
+          <a href="index.html#about" data-i18n="nav.about">關於開明</a>
+          <a href="index.html#projects" data-i18n="nav.works">合作實績</a>
+          <a href="index.html#news" data-i18n="nav.news">最新動態</a>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_contact">客服</h4>
+          <a href="quote.html" data-i18n="btn.quote">線上詢價</a>
+          <a href="tel:+84908421410">0908 421 410</a>
+          <a href="https://line.me/R/ti/p/@khaiminh" target="_blank" rel="noopener">LINE / Zalo</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer.copyright">© 2026 Khai Minh Group ‧ 開明集團 All Rights Reserved.</div>
+        <div class="footer-social">
+          <span data-i18n="footer.ssl">SSL 加密</span>
+          <span>·</span>
+          <span data-i18n="footer.nda">NDA 保密承諾</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING CONTACT ==================== -->
+  <div class="floating-contact">
+    <a href="https://line.me/R/ti/p/@khaiminh" class="fc-btn fc-line" target="_blank" rel="noopener" aria-label="LINE">
+      <span class="fc-btn-label" data-i18n="floating.line_label">LINE 諮詢</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.7 2 10.2c0 4.1 3.6 7.5 8.4 8.1.3.1.7.2.8.5.1.3.1.7 0 1l-.1.8c-.1.3-.2 1.1 1 .6 1.1-.5 6.2-3.7 8.5-6.3 1.5-1.7 2.4-3.4 2.4-5.4C23 6 18.5 2 12 2z"/></svg>
+    </a>
+    <a href="https://zalo.me/84908421410" class="fc-btn fc-zalo" target="_blank" rel="noopener" aria-label="Zalo">
+      <span class="fc-btn-label" data-i18n="floating.zalo_label">Zalo 聯絡</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="12" y="16" font-size="11" font-weight="bold" fill="#0068FF" text-anchor="middle">Z</text></svg>
+    </a>
+    <a href="tel:+84908421410" class="fc-btn fc-phone" aria-label="Phone">
+      <span class="fc-btn-label" data-i18n="floating.phone_label">撥打電話</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+    </a>
+  </div>
+
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

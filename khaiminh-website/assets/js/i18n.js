@@ -1,131 +1,165 @@
+/* ============================================
+   KHAI MINH GROUP — i18n 語系切換引擎
+   ============================================
+   原理：
+   1. 讀取 localStorage.km_lang，否則用瀏覽器語言推斷預設語系
+   2. fetch() 對應的 i18n/{lang}.json
+   3. 掃描所有 [data-i18n]、[data-i18n-placeholder]、[data-i18n-aria] 替換文字
+   4. <html lang> 屬性同步更新（SEO 與 a11y）
+   ============================================ */
+
 (function () {
-  const supported = ["tw", "vn", "en"];
-  const defaultLang = "tw";
-  function getStoredLang() {
+  'use strict';
+
+  const SUPPORTED = ['tw', 'vn', 'en'];
+  const STORAGE_KEY = 'km_lang';
+  const HTML_LANG = { tw: 'zh-Hant', vn: 'vi', en: 'en' };
+
+  // 語系字典快取
+  const cache = {};
+
+  /**
+   * 由瀏覽器語言推斷預設語系
+   */
+  function detectDefaultLang() {
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored && SUPPORTED.includes(stored)) return stored;
+
+    const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
+    if (nav.startsWith('zh')) return 'tw';
+    if (nav.startsWith('vi')) return 'vn';
+    return 'en';
+  }
+
+  /**
+   * 由 dot-path 取值，例如 "home.service_1_name"
+   */
+  function getByPath(obj, path) {
+    return path.split('.').reduce((acc, key) => {
+      if (acc == null) return undefined;
+      return acc[key];
+    }, obj);
+  }
+
+  /**
+   * 載入指定語系 JSON
+   */
+  async function loadDict(lang) {
+    if (cache[lang]) return cache[lang];
     try {
-      return localStorage.getItem("km-lang") || defaultLang;
-    } catch (_) {
-      return defaultLang;
+      const res = await fetch(`i18n/${lang}.json`, { cache: 'force-cache' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      cache[lang] = await res.json();
+      return cache[lang];
+    } catch (err) {
+      console.error('[i18n] 載入失敗:', lang, err);
+      // fallback 到 tw
+      if (lang !== 'tw') return loadDict('tw');
+      return {};
     }
   }
 
-  function setStoredLang(lang) {
-    try {
-      localStorage.setItem("km-lang", lang);
-    } catch (_) {
-      // Ignore storage errors (private mode / blocked storage).
-    }
-  }
-
-  const state = { dict: {}, lang: getStoredLang() };
-
-  function getValue(path) {
-    return path.split(".").reduce((value, key) => value && value[key], state.dict);
-  }
-
-  function applyTranslations() {
-    document.documentElement.lang = state.lang === "tw" ? "zh-Hant" : state.lang === "vn" ? "vi" : "en";
-    document.querySelectorAll("[data-i18n]").forEach((node) => {
-      const text = getValue(node.dataset.i18n);
-      if (typeof text === "string") node.textContent = text;
+  /**
+   * 套用字典到 DOM
+   */
+  function apply(dict) {
+    // 一般文字
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      const val = getByPath(dict, key);
+      if (typeof val === 'string') {
+        el.textContent = val;
+      }
     });
-    document.querySelectorAll("[data-i18n-placeholder]").forEach((node) => {
-      const text = getValue(node.dataset.i18nPlaceholder);
-      if (typeof text === "string") node.setAttribute("placeholder", text);
+
+    // placeholder
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-i18n-placeholder');
+      const val = getByPath(dict, key);
+      if (typeof val === 'string') {
+        el.setAttribute('placeholder', val);
+      }
     });
-    document.querySelectorAll("[data-lang]").forEach((button) => {
-      button.classList.toggle("active", button.dataset.lang === state.lang);
+
+    // aria-label
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const key = el.getAttribute('data-i18n-aria');
+      const val = getByPath(dict, key);
+      if (typeof val === 'string') {
+        el.setAttribute('aria-label', val);
+      }
     });
-    applyQuoteEnglishOverrides();
+
+    // title 屬性
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      const val = getByPath(dict, key);
+      if (typeof val === 'string') {
+        el.setAttribute('title', val);
+      }
+    });
   }
 
-  function applyQuoteEnglishOverrides() {
-    if (document.documentElement.dataset.page !== "quote") return;
-    if (state.lang !== "en") return;
+  /**
+   * 切換到指定語系
+   */
+  async function setLang(lang) {
+    if (!SUPPORTED.includes(lang)) lang = 'tw';
+    localStorage.setItem(STORAGE_KEY, lang);
 
-    const setText = (selector, text) => {
-      const node = document.querySelector(selector);
-      if (node) node.textContent = text;
-    };
+    const dict = await loadDict(lang);
+    apply(dict);
 
-    setText(".quote-kicker", "REQUEST A QUOTE · YÊU CẦU BÁO GIÁ");
-    setText(".quote-pro-hero h1", "Submit drawings online, get a reply within 24 hours");
-    setText(".quote-pro-hero p:not(.quote-kicker)", "Fill in requirements and attach drawings or site photos for evaluation.");
-    setText(".quote-help-card strong", "Prefer not to fill out the form?");
-    setText(".quote-help-card a[data-config-href='phoneHrefTel'] span:last-child", "(Chinese)");
+    // 更新 <html lang>
+    document.documentElement.setAttribute('lang', HTML_LANG[lang] || 'en');
 
-    setText(".form-block:nth-of-type(2) .form-heading h2", "Technical Requirements");
-    setText(".form-block:nth-of-type(2) .form-heading p", "Please provide process details so we can evaluate feasibility and lead time.");
-    setText(".form-block:nth-of-type(3) .form-heading h2", "Drawings / Attachments");
-    setText(".form-block:nth-of-type(3) .form-heading p", "Upload engineering drawings (PDF/DWG) or product photos to speed up quotation.");
-    setText(".upload-zone strong", "Drag files here or click to select");
-    setText(".upload-zone small", "Supports PDF / DWG / JPG / PNG / ZIP. After email draft opens, please attach files manually.");
-    setText(".privacy-note", "Your uploaded drawings are only used for quotation and technical evaluation, and will not be shared externally.");
+    // 更新切換按鈕狀態
+    document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
+      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
+    });
 
-    setText(".form-block:nth-of-type(4) .form-heading h2", "Contact Information");
-    setText(".form-block:nth-of-type(4) .form-heading p", "Leave your contact details and preferred method so we can follow up quickly.");
-
-    const labelMap = [
-      ["label:has([name='process']) > span", "Process *"],
-      ["label:has([name='material']) > span", "Material"],
-      ["label[data-material-note-wrap] > span", "Material Note (Optional)"],
-      ["label:has([name='part_size']) > span", "Part Size (L × W × H mm)"],
-      ["label:has([name='quantity']) > span", "Quantity *"],
-      ["label:has([name='frequency']) > span", "Frequency"],
-      ["label:has([name='deadline']) > span", "Target Date"],
-      ["label:has([name='message']) > span", "Requirement / Notes"],
-      ["label:has([name='name']) > span", "Name *"],
-      ["label:has([name='title']) > span", "Title"],
-      ["label:has([name='company']) > span", "Company *"],
-      ["label:has([name='industry']) > span", "Industry"],
-      ["label:has([name='phone']) > span", "Phone / Zalo *"],
-      ["label:has([name='email']) > span", "Email *"],
-      ["label:has([name='location']) > span", "Location / City"],
-      ["fieldset.radio-group legend", "Preferred Contact"]
-    ];
-    labelMap.forEach(([selector, text]) => setText(selector, text));
-
-    setText(".visit-check span", "Need on-site visit / urgent support.");
-    setText(".quote-submit", "Send Quote Request by Email");
+    // 廣播事件供 main.js 使用
+    window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang, dict } }));
   }
 
-  async function loadLanguage(lang) {
-    if (window.location.protocol === "file:") {
-      throw new Error("Language switching requires HTTP/HTTPS. Please run a local server instead of opening file:// directly.");
-    }
-    const nextLang = supported.includes(lang) ? lang : defaultLang;
-    try {
-      const response = await fetch(`i18n/${nextLang}.json`, { cache: "no-store" });
-      if (!response.ok) throw new Error(`Failed to load language file: ${nextLang}`);
-      state.dict = await response.json();
-      state.lang = nextLang;
-      setStoredLang(nextLang);
-      applyTranslations();
-    } catch (error) {
-      if (nextLang !== defaultLang) return loadLanguage(defaultLang);
-      throw error;
-    }
+  /**
+   * 取得當前字典（供其他 JS 模組讀取）
+   */
+  function getDict() {
+    const lang = localStorage.getItem(STORAGE_KEY) || detectDefaultLang();
+    return cache[lang] || {};
   }
 
-  document.querySelectorAll("[data-lang]").forEach((button) => {
-    button.addEventListener("click", () => {
-      loadLanguage(button.dataset.lang).catch((error) => {
-        console.error(error);
-        alert("語言切換需透過 http/https 開啟網站，請不要直接雙擊 index.html。");
+  function getLang() {
+    return localStorage.getItem(STORAGE_KEY) || detectDefaultLang();
+  }
+
+  /**
+   * 綁定切換按鈕
+   */
+  function bindSwitcher() {
+    document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-lang');
+        setLang(target);
       });
     });
-  });
+  }
 
-  document.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!(target instanceof Element)) return;
-    const button = target.closest("[data-lang]");
-    if (!button) return;
-    loadLanguage(button.dataset.lang).catch(console.error);
-  });
+  /**
+   * 初始化
+   */
+  function init() {
+    bindSwitcher();
+    setLang(detectDefaultLang());
+  }
 
-  window.KhaiMinhI18n = { loadLanguage };
-  loadLanguage(state.lang).catch(() => {
-    if (window.location.protocol !== "file:") loadLanguage(defaultLang).catch(console.error);
-  });
+  // 暴露給其他模組
+  window.KM_i18n = { setLang, getDict, getLang };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 })();

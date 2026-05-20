@@ -1,243 +1,472 @@
-<!doctype html>
-<html lang="zh-Hant" data-page="quote">
+<!DOCTYPE html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="開明集團詢價單，支援表面處理、精密機加工、機械工程、閥件維修與設備採購需求。">
-  <title>詢價單 | 開明集團 KHAI MINH</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="開明集團線上詢價 — 24 小時內回覆報價。上傳圖面或樣品照片，工程師團隊立即評估。資料嚴格保密，簽 NDA 保證不外流。">
+  <meta name="theme-color" content="#1A3A52">
+  <title>線上詢價 | 開明集團 Khai Minh Group</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@500;700&family=Shippori+Mincho:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38 38'%3E%3Crect fill='%231A3A52' width='38' height='38'/%3E%3Ctext x='50%25' y='50%25' fill='%23D4A857' font-family='serif' font-size='18' text-anchor='middle' dominant-baseline='central'%3E開%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-  <header class="site-header" data-header>
-    <a class="brand" href="index.html" aria-label="Khai Minh"><span class="brand-mark">開</span><span><strong data-i18n="brand.name">開明集團</strong><small data-config="companyName">KHAI MINH GROUP</small></span></a>
-    <button class="nav-toggle" type="button" data-nav-toggle aria-label="Menu"><span></span><span></span><span></span></button>
-    <nav class="site-nav" data-nav>
-      <a href="index.html#about" data-i18n="nav.about">關於</a>
-      <a href="service.html" data-i18n="nav.services">服務</a>
-      <a href="index.html#solutions" data-i18n="nav.solutions">方案</a>
-      <a href="index.html#cases" data-i18n="nav.cases">實績</a>
-      <a href="index.html#news" data-i18n="nav.news">動態</a>
-      <div class="language-switcher"><button type="button" data-lang="tw">繁中</button><button type="button" data-lang="vn">VN</button><button type="button" data-lang="en">EN</button></div>
-      <a class="btn btn-gold" href="quote.html" data-i18n="nav.quote">詢價</a>
-    </nav>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-mark">開</div>
+        <div class="logo-text">
+          <strong data-i18n="site_name">開明集團</strong>
+          <span data-i18n="site_name_en">KHAI MINH GROUP</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="mainNav">
+        <a href="index.html#about" data-i18n="nav.about">關於</a>
+        <a href="service.html" data-i18n="nav.services">服務</a>
+        <a href="index.html#industries" data-i18n="nav.solutions">方案</a>
+        <a href="index.html#projects" data-i18n="nav.works">實績</a>
+        <a href="index.html#news" data-i18n="nav.news">動態</a>
+        <a href="quote.html" class="active" data-i18n="nav.contact">詢價</a>
+      </nav>
+
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-lang="tw">繁中</button>
+        <button type="button" data-lang="vn">VN</button>
+        <button type="button" data-lang="en">EN</button>
+      </div>
+
+      <a href="tel:+84908421410" class="btn-primary">📞 0908 421 410</a>
+
+      <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </header>
 
-  <main>
-    <section class="quote-pro-hero">
-      <div>
-        <p class="quote-kicker" data-i18n="quote.heroKicker">REQUEST A QUOTE · YEU CAU BAO GIA</p>
-        <h1 data-i18n="quote.heroTitle">Submit drawings online, get a reply within 24 hours</h1>
-        <p data-i18n="quote.heroText">Fill in requirements and attach drawings or site photos for evaluation.</p>
+  <!-- ==================== BREADCRUMB ==================== -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <div class="container">
+      <a href="index.html" data-i18n="service_page.breadcrumb_home">首頁</a>
+      <span class="sep">/</span>
+      <span class="current" data-i18n="quote_page.breadcrumb_current">線上詢價</span>
+    </div>
+  </nav>
+
+  <!-- ==================== QUOTE HERO ==================== -->
+  <section class="service-hero" style="padding: 48px 0;">
+    <div class="container">
+      <div class="service-hero-grid">
+        <div>
+          <div class="chapter" style="color:#D4A857;" data-i18n="quote_page.hero_label">REQUEST A QUOTE · YÊU CẦU BÁO GIÁ</div>
+          <h1 data-i18n="quote_page.hero_title">線上提交圖面，24 小時內報價</h1>
+          <p class="desc" data-i18n="quote_page.hero_desc">填寫越完整，報價越精準。所有資料嚴格保密，不外流。</p>
+        </div>
+
+        <div class="quick-facts">
+          <div class="quick-facts-title" data-i18n="quote_page.alt_title">不想填表單？</div>
+          <a href="tel:+84908421410" class="qf-row" style="color:white; text-decoration:none;">
+            <span class="label">📞 <span data-i18n="quote_page.alt_phone">中文</span></span>
+            <span class="value">0908 421 410</span>
+          </a>
+          <a href="https://line.me/R/ti/p/@khaiminh" target="_blank" rel="noopener" class="qf-row" style="color:white; text-decoration:none;">
+            <span class="label">💬 LINE</span>
+            <span class="value" data-i18n="quote_page.alt_line">LINE @khaiminh</span>
+          </a>
+          <a href="mailto:khaiminhgroup11668@gmail.com" class="qf-row" style="color:white; text-decoration:none;">
+            <span class="label">✉ Email</span>
+            <span class="value" data-i18n="quote_page.alt_email">khaiminhgroup@gmail</span>
+          </a>
+        </div>
       </div>
-      <aside class="quote-help-card">
-        <strong data-i18n="quote.helpTitle">Prefer not to fill out the form?</strong>
-        <a href="tel:+84908421410" data-config-href="phoneHrefTel"><span data-config="phoneDisplay">0908 421 410</span> <span data-i18n="quote.helpCallLabel">(Chinese)</span></a>
-        <a href="https://zalo.me/84908421410" data-config-href="zaloUrl" target="_blank" rel="noopener">Zalo <span data-config="phoneDisplay">0908 421 410</span></a>
-        <a href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto" data-config="email">khaiminhgroup11668@gmail.com</a>
-      </aside>
-    </section>
+    </div>
+  </section>
 
-    <section class="quote-steps" aria-label="Quote steps">
-      <div class="active"><span>1</span><strong data-i18n="quote.step1">Select Services</strong></div>
-      <div><span>2</span><strong data-i18n="quote.step2">Technical Requirements</strong></div>
-      <div><span>3</span><strong data-i18n="quote.step3">Drawings / Attachments</strong></div>
-      <div><span>4</span><strong data-i18n="quote.step4">Contact Info</strong></div>
-    </section>
+  <!-- ==================== STEPPER ==================== -->
+  <div class="form-stepper">
+    <div class="form-stepper-inner">
+      <div class="fs-step active" data-step="1">
+        <div class="fs-step-num">壱</div>
+        <div class="fs-step-label" data-i18n="quote_page.step_1">選擇服務</div>
+      </div>
+      <div class="fs-line"></div>
+      <div class="fs-step" data-step="2">
+        <div class="fs-step-num">弐</div>
+        <div class="fs-step-label" data-i18n="quote_page.step_2">需求規格</div>
+      </div>
+      <div class="fs-line"></div>
+      <div class="fs-step" data-step="3">
+        <div class="fs-step-num">参</div>
+        <div class="fs-step-label" data-i18n="quote_page.step_3">圖面附件</div>
+      </div>
+      <div class="fs-line"></div>
+      <div class="fs-step" data-step="4">
+        <div class="fs-step-num">四</div>
+        <div class="fs-step-label" data-i18n="quote_page.step_4">聯絡方式</div>
+      </div>
+    </div>
+  </div>
 
-    <section class="section quote-pro-section">
-      <form class="quote-form quote-pro-form" data-quote-form data-config-recipient data-recipient="khaiminhgroup11668@gmail.com">
-        <section class="form-block">
-          <div class="form-heading">
-            <h2><span data-i18n="quote.servicesTitle">What services do you need?</span> <small data-i18n="quote.servicesTitleNote">Multiple selection</small></h2>
-            <p data-i18n="quote.servicesIntro">Select required service items. Each item can be quoted separately or bundled.</p>
-          </div>
-          <div class="service-picker" data-required-group="services">
-            <label class="service-option">
-              <input type="checkbox" name="services" value="表面處理" checked>
-              <span><strong data-i18n="quote.serviceSurfaceTitle">Surface Treatment</strong><small data-i18n="quote.serviceSurfaceDesc">Electroplating / Chrome / Sandblasting</small></span>
-            </label>
-            <label class="service-option">
-              <input type="checkbox" name="services" value="精密機加工">
-              <span><strong data-i18n="quote.serviceMachiningTitle">Precision Machining</strong><small data-i18n="quote.serviceMachiningDesc">CNC / Milling / Turning / Grinding</small></span>
-            </label>
-            <label class="service-option">
-              <input type="checkbox" name="services" value="機械工程">
-              <span><strong data-i18n="quote.serviceMechanicalTitle">Mechanical Engineering</strong><small data-i18n="quote.serviceMechanicalDesc">Electrical / Water / Compressed Air</small></span>
-            </label>
-            <label class="service-option">
-              <input type="checkbox" name="services" value="閥件採購維修">
-              <span><strong data-i18n="quote.serviceValveTitle">Valve Repair</strong><small data-i18n="quote.serviceValveDesc">Pneumatic / Water / Hydraulic Valves</small></span>
-            </label>
-            <label class="service-option">
-              <input type="checkbox" name="services" value="機械進出口">
-              <span><strong data-i18n="quote.serviceTradeTitle">Import / Export</strong><small data-i18n="quote.serviceTradeDesc">Sourcing / Customs / Logistics</small></span>
-            </label>
-            <label class="service-option">
-              <input type="checkbox" name="services" value="技術轉讓">
-              <span><strong data-i18n="quote.serviceTransferTitle">Technology Transfer</strong><small data-i18n="quote.serviceTransferDesc">Process Consulting / Training</small></span>
-            </label>
-          </div>
-        </section>
+  <!-- ==================== FORM ==================== -->
+  <section class="section section-light">
+    <div class="container-narrow">
 
-        <section class="form-block">
-          <div class="form-heading">
-            <h2>表面處理需求細節</h2>
-            <p>這些資訊幫助我們快速判斷製程、材料相容性與交期。</p>
-          </div>
-          <div class="form-grid">
-            <label>
-              <span>處理製程 <b>*</b></span>
-              <select name="process" required>
-                <option value="">請選擇處理製程</option>
-                <option>電鍍</option>
-                <option>鍍鉻</option>
-                <option>噴砂</option>
-                <option>研磨 / 拋光</option>
-                <option>噴塗</option>
-                <option>橡膠包覆</option>
-                <option>其他 / 需評估</option>
-              </select>
-            </label>
-            <label>
-              <span>材質</span>
-              <select name="material">
-                <option value="">請選擇材質</option>
-                <option>碳鋼</option>
-                <option>不鏽鋼</option>
-                <option>鋁</option>
-                <option>銅</option>
-                <option>塑膠 / 橡膠</option>
-                <option value="other_unsure">其他 / 不確定</option>
-              </select>
-            </label>
-            <label class="full" data-material-note-wrap hidden>
-              <span>材質備註（選填）</span>
-              <textarea name="material_note" rows="3" placeholder="例如：SUS304、SUS316、SCM440、AL6061、NBR、食品級、耐酸鹼、厚度5mm"></textarea>
-            </label>
-            <label>
-              <span>零件尺寸（長 × 寬 × 高 mm）</span>
-              <input name="part_size" type="text" placeholder="例：500 × 300 × 150">
-            </label>
-            <label>
-              <span>數量 <b>*</b></span>
-              <div class="inline-fields">
-                <input name="quantity" type="number" min="1" placeholder="50" required>
-                <select name="quantity_unit">
-                  <option>件</option>
-                  <option>組</option>
-                  <option>批</option>
-                  <option>套</option>
-                </select>
+      <form id="quoteForm" novalidate>
+        <!-- Honeypot (anti-spam) -->
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+        <!-- Step 1: 服務選擇 -->
+        <section class="form-section" data-section="1">
+          <h2 class="form-section-title" data-i18n="quote_page.sec_1_title">需要哪些服務？</h2>
+          <p class="form-section-sub" data-i18n="quote_page.sec_1_sub">可複選，每項可單獨報價或包套處理</p>
+
+          <div class="service-pick-grid">
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="surface">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_1_name">表面處理</div>
+                <div class="service-pick-sub" data-i18n="home.service_1_vn">Xử lý bề mặt</div>
               </div>
             </label>
-            <label>
-              <span>頻率</span>
+
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="machining">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_2_name">精密機加工</div>
+                <div class="service-pick-sub" data-i18n="home.service_2_vn">Gia công cơ khí</div>
+              </div>
+            </label>
+
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="engineering">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_3_name">機械工程</div>
+                <div class="service-pick-sub" data-i18n="home.service_3_vn">Công trình cơ điện</div>
+              </div>
+            </label>
+
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="valve">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_4_name">閥件維修</div>
+                <div class="service-pick-sub" data-i18n="home.service_4_vn">Van công nghiệp</div>
+              </div>
+            </label>
+
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="trading">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_5_name">進出口貿易</div>
+                <div class="service-pick-sub" data-i18n="home.service_5_vn">Xuất nhập khẩu</div>
+              </div>
+            </label>
+
+            <label class="service-pick">
+              <input type="checkbox" name="services[]" value="transfer">
+              <span class="check-box">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+              <div>
+                <div class="service-pick-title" data-i18n="home.service_6_name">技術轉讓</div>
+                <div class="service-pick-sub" data-i18n="home.service_6_vn">Chuyển giao công nghệ</div>
+              </div>
+            </label>
+          </div>
+          <div class="form-error" id="services-error" data-i18n="validation.no_service">請至少選擇一項服務</div>
+        </section>
+
+        <!-- Step 2: 需求規格 -->
+        <section class="form-section" data-section="2">
+          <h2 class="form-section-title" data-i18n="quote_page.sec_2_title">表面處理需求細節</h2>
+          <p class="form-section-sub" data-i18n="quote_page.sec_2_sub">這些資訊幫助我們快速報價</p>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_process">處理製程</span></label>
+              <select name="process">
+                <option value="" data-i18n="quote_page.f_process_default">請選擇處理製程</option>
+                <option data-i18n="service_page.proc_1">電鍍</option>
+                <option data-i18n="service_page.proc_2">鍍鉻</option>
+                <option data-i18n="service_page.proc_3">噴砂</option>
+                <option data-i18n="service_page.proc_4">噴塗</option>
+                <option data-i18n="service_page.proc_5">研磨</option>
+                <option data-i18n="service_page.proc_6">拋光</option>
+                <option data-i18n="service_page.proc_7">橡膠包輥</option>
+                <option data-i18n="service_page.proc_8">內孔加工</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_material">材質</span></label>
+              <select name="material">
+                <option value="" data-i18n="quote_page.f_material_default">請選擇材質</option>
+                <option>SS400 / Q235</option>
+                <option>SUS304 / SUS316</option>
+                <option>Aluminum 6061 / 7075</option>
+                <option>Copper / Brass</option>
+                <option>SKD11 / SKD61</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row row-3">
+            <div class="form-field">
+              <label>
+                <span data-i18n="quote_page.f_size">零件尺寸</span>
+                <span class="hint" data-i18n="quote_page.f_size_hint">(長 × 寬 × 高 mm)</span>
+              </label>
+              <input type="text" name="size" data-i18n-placeholder="quote_page.f_size_placeholder" placeholder="例: 500 × 300 × 150">
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_qty">數量</span></label>
+              <input type="number" name="qty" min="1" data-i18n-placeholder="quote_page.f_qty_placeholder" placeholder="50">
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_freq">頻率</span></label>
               <select name="frequency">
-                <option>一次性訂單</option>
-                <option>每週固定</option>
-                <option>每月固定</option>
-                <option>長期配合</option>
+                <option data-i18n="quote_page.freq_1">一次性訂單</option>
+                <option data-i18n="quote_page.freq_2">每週固定</option>
+                <option data-i18n="quote_page.freq_3">每月固定</option>
+                <option data-i18n="quote_page.freq_4">長期合作</option>
               </select>
-            </label>
-            <label>
-              <span>期望交期</span>
-              <select name="deadline">
-                <option>越快越好（急件）</option>
-                <option>1 週內</option>
-                <option>2 週內</option>
-                <option>1 個月內</option>
-                <option>可討論</option>
-              </select>
-            </label>
-            <label class="full">
-              <span>特殊要求 / 規格說明</span>
-              <textarea name="message" rows="5" placeholder="例：膜厚 25μm、需通過鹽霧 480 小時測試、客戶要求 RoHS 認證..." required></textarea>
-            </label>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label><span data-i18n="quote_page.f_due">期望交期</span></label>
+            <select name="due">
+              <option data-i18n="quote_page.due_1">越快越好 (急件)</option>
+              <option data-i18n="quote_page.due_2">1 週內</option>
+              <option data-i18n="quote_page.due_3">2 週內</option>
+              <option data-i18n="quote_page.due_4">1 個月內</option>
+              <option data-i18n="quote_page.due_5">彈性</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label><span data-i18n="quote_page.f_special">特殊要求 / 規格說明</span></label>
+            <textarea name="special" rows="4" data-i18n-placeholder="quote_page.f_special_placeholder" placeholder="例：膜厚 25μm、需通過鹽霧 480 小時測試、客戶要求 RoHS 認證⋯"></textarea>
           </div>
         </section>
 
-        <section class="form-block">
-          <div class="form-heading">
-            <h2>圖面 / 樣品照片</h2>
-            <p>上傳工程圖（PDF/DWG）或實物照片，可加快報價速度。</p>
-          </div>
-          <label class="upload-zone">
-            <input name="attachment" type="file" accept="image/*,.pdf,.dwg,.dxf,.zip" multiple>
-            <span class="upload-icon">+</span>
-            <strong>拖曳檔案到此，或點擊選擇</strong>
-            <small>支援 PDF / DWG / JPG / PNG / ZIP。Email 草稿開啟後，請手動附上檔案。</small>
+        <!-- Step 3: 圖面附件 -->
+        <section class="form-section" data-section="3">
+          <h2 class="form-section-title" data-i18n="quote_page.sec_3_title">圖面 / 樣品照片</h2>
+          <p class="form-section-sub" data-i18n="quote_page.sec_3_sub">上傳工程圖（PDF/DWG）或實物照片，加快報價速度</p>
+
+          <label class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" name="files[]" multiple accept=".pdf,.dwg,.dxf,.jpg,.jpeg,.png,.zip,.step,.stp,.igs" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+            </svg>
+            <div class="upload-zone-title" data-i18n="quote_page.upload_title">拖曳檔案到此，或點擊上傳</div>
+            <div class="upload-zone-sub" data-i18n="quote_page.upload_sub">支援 PDF / DWG / JPG / PNG / ZIP · 單檔上限 25MB</div>
           </label>
-          <p class="privacy-note">你上傳或提供的圖面僅供開明集團報價與工程評估使用，不會外流或轉作他用。</p>
+
+          <div id="fileList" style="margin-top:12px;"></div>
+
+          <div class="upload-nda">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="11" width="16" height="10" rx="1"/>
+              <path d="M8 11V7a4 4 0 018 0v4"/>
+            </svg>
+            <span data-i18n="quote_page.upload_nda">您上傳的圖面我們會簽 NDA，絕不外流或轉作他用</span>
+          </div>
         </section>
 
-        <section class="form-block">
-          <div class="form-heading">
-            <h2>聯絡方式</h2>
-            <p>留下採購或工程窗口，方便我們補問規格與安排報價。</p>
+        <!-- Step 4: 聯絡方式 -->
+        <section class="form-section" data-section="4">
+          <h2 class="form-section-title" data-i18n="quote_page.sec_4_title">聯絡方式</h2>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_name">姓名</span> <span class="req">*</span></label>
+              <input type="text" name="name" required data-i18n-placeholder="quote_page.f_name_placeholder" placeholder="王先生">
+              <div class="form-error" data-i18n="validation.required">此欄位必填</div>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_role">職稱</span></label>
+              <input type="text" name="role" data-i18n-placeholder="quote_page.f_role_placeholder" placeholder="採購經理 / 廠長 / 工程師">
+            </div>
           </div>
-          <div class="form-grid">
-            <label>
-              <span>姓名 <b>*</b></span>
-              <input name="name" type="text" autocomplete="name" placeholder="王先生" required>
-            </label>
-            <label>
-              <span>職稱</span>
-              <input name="title" type="text" placeholder="採購經理 / 廠長 / 工程師">
-            </label>
-            <label>
-              <span>公司名稱 <b>*</b></span>
-              <input name="company" type="text" autocomplete="organization" placeholder="台塑越南有限公司" required>
-            </label>
-            <label>
-              <span>產業類別</span>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_company">公司名稱</span> <span class="req">*</span></label>
+              <input type="text" name="company" required data-i18n-placeholder="quote_page.f_company_placeholder" placeholder="台塑越南有限公司">
+              <div class="form-error" data-i18n="validation.required">此欄位必填</div>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_industry">產業類別</span></label>
               <select name="industry">
-                <option value="">請選擇</option>
-                <option>塑膠 / 橡膠</option>
-                <option>金屬加工</option>
-                <option>電子 / 電機</option>
-                <option>食品 / 包裝</option>
-                <option>紡織 / 製鞋</option>
-                <option>其他製造業</option>
+                <option value=""></option>
+                <option data-i18n="home.ind_electronics">電子廠</option>
+                <option data-i18n="home.ind_auto">汽機車零件</option>
+                <option data-i18n="home.ind_textile">紡織業</option>
+                <option data-i18n="home.ind_furniture">家具五金</option>
+                <option data-i18n="home.ind_food">食品機械</option>
+                <option>Other</option>
               </select>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_phone">電話 / WhatsApp</span> <span class="req">*</span></label>
+              <input type="tel" name="phone" required data-i18n-placeholder="quote_page.f_phone_placeholder" placeholder="+84 90 xxx xxxx">
+              <div class="form-error" data-i18n="validation.invalid_phone">電話格式不正確</div>
+            </div>
+
+            <div class="form-field">
+              <label><span data-i18n="quote_page.f_email">Email</span> <span class="req">*</span></label>
+              <input type="email" name="email" required data-i18n-placeholder="quote_page.f_email_placeholder" placeholder="purchasing@company.com">
+              <div class="form-error" data-i18n="validation.invalid_email">Email 格式不正確</div>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label><span data-i18n="quote_page.f_location">所在工業區 / 城市</span></label>
+            <input type="text" name="location" placeholder="Amata · Long Đức · Nhơn Trạch · HCM · Hà Nội ...">
+          </div>
+
+          <div class="form-field">
+            <label><span data-i18n="quote_page.f_pref_contact">偏好聯絡方式</span></label>
+            <div class="radio-row">
+              <label><input type="radio" name="pref_contact" value="phone" checked> <span data-i18n="quote_page.f_pref_phone">電話</span></label>
+              <label><input type="radio" name="pref_contact" value="email"> <span data-i18n="quote_page.f_pref_email">Email</span></label>
+              <label><input type="radio" name="pref_contact" value="line"> <span data-i18n="quote_page.f_pref_line">LINE</span></label>
+              <label><input type="radio" name="pref_contact" value="zalo"> <span data-i18n="quote_page.f_pref_zalo">Zalo</span></label>
+            </div>
+          </div>
+
+          <div class="visit-confirm">
+            <input type="checkbox" name="visit" id="visit" value="yes">
+            <label for="visit">
+              <strong data-i18n="quote_page.visit_label">同時預約免費廠房參觀</strong>
+              <span style="display:block; font-size:11px; color:var(--color-text-muted); margin-top:2px;" data-i18n="quote_page.visit_sub">看現場最直接，眼見為憑</span>
             </label>
-            <label>
-              <span>電話 / Zalo <b>*</b></span>
-              <input name="phone" type="tel" autocomplete="tel" placeholder="+84 90 xxx xxxx" required>
-            </label>
-            <label>
-              <span>Email <b>*</b></span>
-              <input name="email" type="email" autocomplete="email" placeholder="purchasing@company.com" required>
-            </label>
-            <label>
-              <span>所在工業區 / 城市</span>
-              <select name="location">
-                <option value="">請選擇</option>
-                <option>同奈 Dong Nai</option>
-                <option>胡志明 Ho Chi Minh City</option>
-                <option>平陽 Binh Duong</option>
-                <option>隆安 Long An</option>
-                <option>巴地頭頓 Ba Ria - Vung Tau</option>
-                <option>其他地區</option>
-              </select>
-            </label>
-            <fieldset class="radio-group">
-              <legend>偏好聯絡方式</legend>
-              <label><input type="radio" name="preferred_contact" value="電話" checked> 電話</label>
-              <label><input type="radio" name="preferred_contact" value="Email"> Email</label>
-              <label><input type="radio" name="preferred_contact" value="Zalo"> Zalo</label>
-            </fieldset>
           </div>
         </section>
 
-        <div class="form-status" data-form-status role="status"></div>
-        <button class="btn btn-gold full quote-submit" type="submit">產生 Email 詢價單</button>
+        <!-- Submit row -->
+        <div class="submit-row">
+          <div class="hint" data-i18n="quote_page.submit_hint">提交即表示您同意我們以您提供的方式聯繫您</div>
+          <button type="submit" class="btn-submit" id="submitBtn">
+            <span data-i18n="btn.submit_quote">送出詢價</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
       </form>
-    </section>
-  </main>
 
-  <footer class="site-footer"><div><strong data-i18n="brand.name">開明集團</strong><p><span data-config="companyName">KHAI MINH GROUP</span> · MST <span data-config="taxCode">3604066672</span></p></div><div><a href="tel:+84908421410" data-config-href="phoneHrefTel" data-config="phoneDisplay">0908 421 410</a><a href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto" data-config="email">khaiminhgroup11668@gmail.com</a></div></footer>
-  <div class="floating-contact" data-floating-contact><a class="zalo" href="https://zalo.me/84908421410" data-config-href="zaloUrl" target="_blank" rel="noopener">Zalo</a><a class="phone" href="tel:+84908421410" data-config-href="phoneHrefTel" data-i18n="contact.phoneShort">電話</a><a class="email" href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto">Email</a></div>
-  <script src="assets/js/config.js"></script>
+      <!-- Success state -->
+      <div class="form-success" id="formSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="8 12 11 15 16 9"/>
+        </svg>
+        <h2 data-i18n="quote_page.success_title">詢價已送出</h2>
+        <p data-i18n="quote_page.success_desc">我們的工程師團隊將於 24 小時內回覆。如為急件，請直接撥打 0908 421 410 或加 LINE @khaiminh</p>
+        <a href="index.html" class="btn-secondary" style="margin-top: 20px;" data-i18n="btn.back">返回</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <div class="logo-mark">開</div>
+            <div class="logo-text">
+              <strong style="color:white" data-i18n="site_name">開明集團</strong>
+              <span data-i18n="site_name_en">KHAI MINH GROUP</span>
+            </div>
+          </div>
+          <strong data-i18n="footer.company_full">CÔNG TY TNHH CƠ KHÍ TM & SX KHAI MINH GROUP</strong>
+          <p>
+            <span data-i18n="footer.address">Đồng Áp 1-3, tổ 9, ấp 3, xã Phước Thái, tỉnh Đồng Nai</span><br>
+            <span data-i18n="footer.tax_id">MST: 3604066672</span><br>
+            TEL: <a href="tel:+84908421410">0908 421 410</a><br>
+            EMAIL: <a href="mailto:khaiminhgroup11668@gmail.com">khaiminhgroup11668@gmail.com</a>
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_services">服務</h4>
+          <a href="service.html" data-i18n="home.service_1_name">表面處理</a>
+          <a href="service.html" data-i18n="home.service_2_name">精密機加工</a>
+          <a href="service.html" data-i18n="home.service_3_name">機械工程</a>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_company">公司</h4>
+          <a href="index.html#about" data-i18n="nav.about">關於開明</a>
+          <a href="index.html#projects" data-i18n="nav.works">合作實績</a>
+          <a href="index.html#news" data-i18n="nav.news">最新動態</a>
+        </div>
+
+        <div class="footer-col">
+          <h4 data-i18n="footer.col_contact">客服</h4>
+          <a href="quote.html" data-i18n="btn.quote">線上詢價</a>
+          <a href="tel:+84908421410">0908 421 410</a>
+          <a href="https://line.me/R/ti/p/@khaiminh" target="_blank" rel="noopener">LINE / Zalo</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div data-i18n="footer.copyright">© 2026 Khai Minh Group ‧ 開明集團 All Rights Reserved.</div>
+        <div class="footer-social">
+          <span data-i18n="footer.ssl">SSL 加密</span>
+          <span>·</span>
+          <span data-i18n="footer.nda">NDA 保密承諾</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== FLOATING CONTACT ==================== -->
+  <div class="floating-contact">
+    <a href="https://line.me/R/ti/p/@khaiminh" class="fc-btn fc-line" target="_blank" rel="noopener" aria-label="LINE">
+      <span class="fc-btn-label" data-i18n="floating.line_label">LINE 諮詢</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.5 2 2 5.7 2 10.2c0 4.1 3.6 7.5 8.4 8.1.3.1.7.2.8.5.1.3.1.7 0 1l-.1.8c-.1.3-.2 1.1 1 .6 1.1-.5 6.2-3.7 8.5-6.3 1.5-1.7 2.4-3.4 2.4-5.4C23 6 18.5 2 12 2z"/></svg>
+    </a>
+    <a href="https://zalo.me/84908421410" class="fc-btn fc-zalo" target="_blank" rel="noopener" aria-label="Zalo">
+      <span class="fc-btn-label" data-i18n="floating.zalo_label">Zalo 聯絡</span>
+      <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/><text x="12" y="16" font-size="11" font-weight="bold" fill="#0068FF" text-anchor="middle">Z</text></svg>
+    </a>
+    <a href="tel:+84908421410" class="fc-btn fc-phone" aria-label="Phone">
+      <span class="fc-btn-label" data-i18n="floating.phone_label">撥打電話</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.37 1.9.72 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0122 16.92z"/></svg>
+    </a>
+  </div>
+
   <script src="assets/js/i18n.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
