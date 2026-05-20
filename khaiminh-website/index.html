@@ -3,6 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="canonical" href="https://khaiminhgroup.vn/">
+  <meta property="og:title" content="KHAI MINH GROUP">
+  <meta property="og:description" content="Industrial services in Vietnam: surface treatment, precision machining, valve repair, and engineering support.">
+  <meta property="og:type" content="website">
+  <!-- TODO: add assets/img/og-cover.jpg, then enable:
+  <meta property="og:image" content="https://khaiminhgroup.vn/assets/img/og-cover.jpg">
+  -->
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="description" content="開明集團提供越南在地表面處理、精密機加工、機械工程、閥件維修、進出口貿易與技術轉讓服務。">
   <title>開明集團 KHAI MINH</title>
   <link rel="stylesheet" href="assets/css/styles.css">
@@ -120,10 +128,10 @@
     <section id="case-photos" class="section case-gallery-section">
       <div class="case-gallery-head">
         <div>
-          <p class="section-kicker">實績照片</p>
-          <h2>現場加工、表面處理與設備維修案例。</h2>
+          <p class="section-kicker" data-i18n="home.casePhotosKicker">實績照片</p>
+          <h2 data-i18n="home.casePhotosTitle">現場加工、表面處理與設備維修案例。</h2>
         </div>
-        <p>照片依服務分類管理，可依客戶保密需求模糊商標、遮蔽圖號或只呈現局部工件。</p>
+        <p data-i18n="home.casePhotosIntro">照片依服務分類管理，可依客戶保密需求模糊商標、遮蔽圖號或只呈現局部工件。</p>
       </div>
       <div class="case-gallery">
         <article class="case-card case-surface">
@@ -141,17 +149,29 @@
             </div>
           </div>
           <div>
-            <span>01 · surface-treatment</span>
-            <h3>表面處理前後對照</h3>
-            <p>噴砂、鍍鉻、研磨與防護塗裝，適用機械零件、滾輪與維修件。</p>
+            <span data-i18n="home.caseCardSurfaceCode">01 · surface-treatment</span>
+            <h3 data-i18n="home.caseCardSurfaceTitle">表面處理前後對照</h3>
+            <p data-i18n="home.caseCardSurfaceDesc">噴砂、鍍鉻、研磨與防護塗裝，適用機械零件、滾輪與維修件。</p>
           </div>
         </article>
         <article class="case-card case-machining">
-          <div class="case-image" role="img" aria-label="Precision machining sample"></div>
+          <div
+            class="case-image"
+            role="img"
+            aria-label="Mechanical engineering sample 1"
+            data-case-carousel="mechanical-engineering"
+            data-case-images="assets/img/cases/mechanical-engineering/553502.jpg,assets/img/cases/mechanical-engineering/553503.jpg"
+            data-case-alt-prefix="Mechanical engineering sample"
+          >
+            <div class="case-carousel-controls">
+              <button type="button" class="case-carousel-btn" data-case-prev aria-label="Previous photo">‹</button>
+              <button type="button" class="case-carousel-btn" data-case-next aria-label="Next photo">›</button>
+            </div>
+          </div>
           <div>
-            <span>02 · precision-machining</span>
-            <h3>精密機加工件</h3>
-            <p>CNC、車銑、磨削與小批量訂製，配合圖面與現場尺寸修正。</p>
+            <span data-i18n="home.caseCardMachiningCode">02 · precision-machining</span>
+            <h3 data-i18n="home.caseCardMachiningTitle">精密機加工件</h3>
+            <p data-i18n="home.caseCardMachiningDesc">CNC、車銑、磨削與小批量訂製，配合圖面與現場尺寸修正。</p>
           </div>
         </article>
         <article class="case-card case-valve">
@@ -169,9 +189,9 @@
             </div>
           </div>
           <div>
-            <span>03 · valve-repair</span>
-            <h3>閥件與設備維修</h3>
-            <p>氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。</p>
+            <span data-i18n="home.caseCardValveCode">03 · valve-repair</span>
+            <h3 data-i18n="home.caseCardValveTitle">閥件與設備維修</h3>
+            <p data-i18n="home.caseCardValveDesc">氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。</p>
           </div>
         </article>
       </div>
@@ -200,6 +220,11 @@
     <div>
       <strong data-i18n="brand.name">開明集團</strong>
       <p><span data-config="companyName">KHAI MINH GROUP</span> · MST <span data-config="taxCode">3604066672</span></p>
+    </div>
+    <div>
+      <p>公司地址：<span>（待補正式地址）</span></p>
+      <a href="https://maps.google.com/?q=Khai+Minh+Group" target="_blank" rel="noopener">Google Map（待補正式連結）</a>
+      <p>營業時間：<span>週一至週六 08:00 - 17:30（待確認）</span></p>
     </div>
     <div>
       <a href="tel:+84908421410" data-config-href="phoneHrefTel" data-config="phoneDisplay">0908 421 410</a>

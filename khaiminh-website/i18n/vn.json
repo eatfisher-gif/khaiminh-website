@@ -25,7 +25,19 @@
     "step3Text": "Theo dõi gia công, kiểm tra chất lượng, vận chuyển và hậu mãi.",
     "contactKicker": "Liên hệ ngay",
     "contactTitle": "Có bản vẽ, hình ảnh hoặc tình trạng thiết bị, hãy gửi để chúng tôi đánh giá.",
-    "contactCta": "Gửi yêu cầu"
+    "contactCta": "Gửi yêu cầu",
+    "casePhotosKicker": "Hình ảnh thực tế",
+    "casePhotosTitle": "Ca xử lý tại hiện trường, xử lý bề mặt và sửa chữa thiết bị.",
+    "casePhotosIntro": "Ảnh được quản lý theo nhóm dịch vụ; có thể làm mờ thương hiệu, che số bản vẽ hoặc chỉ hiển thị một phần chi tiết theo yêu cầu bảo mật của khách hàng.",
+    "caseCardSurfaceCode": "01 · surface-treatment",
+    "caseCardSurfaceTitle": "Đối chiếu trước/sau xử lý bề mặt",
+    "caseCardSurfaceDesc": "Phun cát, mạ crom, mài và sơn bảo vệ; phù hợp cho chi tiết máy, con lăn và linh kiện sửa chữa.",
+    "caseCardMachiningCode": "02 · precision-machining",
+    "caseCardMachiningTitle": "Chi tiết gia công chính xác",
+    "caseCardMachiningDesc": "CNC, tiện phay, mài cắt và đặt hàng lô nhỏ, phối hợp theo bản vẽ và hiệu chỉnh kích thước tại hiện trường.",
+    "caseCardValveCode": "03 · valve-repair",
+    "caseCardValveTitle": "Sửa chữa van và thiết bị",
+    "caseCardValveDesc": "Sửa chữa van khí, van nước, van thủy lực và hệ thống khí nén, hỗ trợ kiểm tra nhanh tại hiện trường."
   },
   "services": {
     "surface": { "title": "Xử lý bề mặt", "vn": "Xử lý bề mặt", "desc": "Mạ điện, mạ crom, phun cát, mài, đánh bóng, sơn phủ, bọc cao su" },

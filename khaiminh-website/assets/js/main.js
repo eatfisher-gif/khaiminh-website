@@ -51,7 +51,7 @@
 
   function initCaseCarousels() {
     const carousels = document.querySelectorAll("[data-case-carousel]");
-    carousels.forEach((node) => {
+    carousels.forEach(async (node) => {
       const images = (node.dataset.caseImages || "")
         .split(",")
         .map((item) => item.trim())
@@ -60,6 +60,35 @@
 
       const prefix = node.dataset.caseAltPrefix || "Case photo";
       let index = 0;
+      const imageSet = new Set(images);
+
+      function parseImagePath(path) {
+        const match = path.match(/^(.*\/)(\d+)(\.[a-zA-Z0-9]+)$/);
+        if (!match) return null;
+        return { dir: match[1], number: Number(match[2]), ext: match[3] };
+      }
+
+      function canLoadImage(path) {
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.onload = () => resolve(true);
+          img.onerror = () => resolve(false);
+          img.src = `${path}?v=${Date.now()}`;
+        });
+      }
+
+      async function discoverSequentialImages() {
+        const last = parseImagePath(images[images.length - 1]);
+        if (!last) return;
+        for (let step = 1; step <= 20; step += 1) {
+          const candidate = `${last.dir}${last.number + step}${last.ext}`;
+          if (imageSet.has(candidate)) continue;
+          const ok = await canLoadImage(candidate);
+          if (!ok) break;
+          imageSet.add(candidate);
+          images.push(candidate);
+        }
+      }
 
       function render() {
         const imagePath = images[index];
@@ -85,10 +114,39 @@
       }
 
       render();
+      await discoverSequentialImages();
     });
   }
 
   initCaseCarousels();
+
+  function initMaterialNoteField() {
+    if (!form) return;
+    const materialSelect = form.querySelector('select[name="material"]');
+    const materialNoteWrap = form.querySelector("[data-material-note-wrap]");
+    const materialNoteInput = form.querySelector('[name="material_note"]');
+    if (!materialSelect || !materialNoteWrap || !materialNoteInput) return;
+
+    function toggleMaterialNote() {
+      const selectedOption = materialSelect.options[materialSelect.selectedIndex];
+      const selectedValue = (materialSelect.value || "").toLowerCase();
+      const selectedText = selectedOption ? selectedOption.textContent.trim() : "";
+      const isOtherOrUnsure =
+        selectedValue === "other_unsure" ||
+        selectedText.includes("其他") ||
+        selectedText.includes("不確定");
+      const shouldShow = materialSelect.value !== "";
+
+      materialNoteWrap.hidden = !shouldShow;
+      materialNoteInput.required = false;
+      if (isOtherOrUnsure && shouldShow) materialNoteInput.focus();
+    }
+
+    materialSelect.addEventListener("change", toggleMaterialNote);
+    toggleMaterialNote();
+  }
+
+  initMaterialNoteField();
 
   if (form && status) {
     form.addEventListener("submit", (event) => {
@@ -126,6 +184,7 @@
         `Selected services: ${services}`,
         `Process: ${data.get("process") || "-"}`,
         `Material: ${data.get("material") || "-"}`,
+        `Material note: ${data.get("material_note") || "-"}`,
         `Part size: ${data.get("part_size") || "-"}`,
         `Quantity: ${data.get("quantity") || "-"} ${data.get("quantity_unit") || ""}`,
         `Frequency: ${data.get("frequency") || "-"}`,

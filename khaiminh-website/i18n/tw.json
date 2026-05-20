@@ -25,7 +25,19 @@
     "step3Text": "追蹤加工、品檢、物流與售後問題。",
     "contactKicker": "立即聯絡",
     "contactTitle": "有圖面、照片或設備狀況，直接傳給我們評估。",
-    "contactCta": "填寫詢價單"
+    "contactCta": "填寫詢價單",
+    "casePhotosKicker": "實績照片",
+    "casePhotosTitle": "現場加工、表面處理與設備維修案例。",
+    "casePhotosIntro": "照片依服務分類管理，可依客戶保密需求模糊商標、遮蔽圖號或只呈現局部工件。",
+    "caseCardSurfaceCode": "01 · surface-treatment",
+    "caseCardSurfaceTitle": "表面處理前後對照",
+    "caseCardSurfaceDesc": "噴砂、鍍鉻、研磨與防護塗裝，適用機械零件、滾輪與維修件。",
+    "caseCardMachiningCode": "02 · precision-machining",
+    "caseCardMachiningTitle": "精密機加工件",
+    "caseCardMachiningDesc": "CNC、車銑、磨削與小批量訂製，配合圖面與現場尺寸修正。",
+    "caseCardValveCode": "03 · valve-repair",
+    "caseCardValveTitle": "閥件與設備維修",
+    "caseCardValveDesc": "氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。"
   },
   "services": {
     "surface": { "title": "表面處理", "vn": "Xử lý bề mặt", "desc": "電鍍、鍍鉻、噴砂、研磨、拋光、噴塗、橡膠包覆" },

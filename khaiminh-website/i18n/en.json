@@ -25,7 +25,19 @@
     "step3Text": "Track processing, QC, logistics and after-service issues.",
     "contactKicker": "Contact",
     "contactTitle": "Send drawings, photos or equipment status for a practical assessment.",
-    "contactCta": "Open Quote Form"
+    "contactCta": "Open Quote Form",
+    "casePhotosKicker": "Case Photos",
+    "casePhotosTitle": "On-site processing, surface treatment, and equipment repair cases.",
+    "casePhotosIntro": "Photos are managed by service category. We can blur logos, mask drawing numbers, or show partial components for confidentiality.",
+    "caseCardSurfaceCode": "01 · surface-treatment",
+    "caseCardSurfaceTitle": "Before / After Surface Treatment",
+    "caseCardSurfaceDesc": "Sandblasting, chrome plating, grinding, and protective coating for machine parts, rollers, and repair items.",
+    "caseCardMachiningCode": "02 · precision-machining",
+    "caseCardMachiningTitle": "Precision Machined Parts",
+    "caseCardMachiningDesc": "CNC, turning/milling, grinding, and small-batch custom work based on drawings and site size adjustments.",
+    "caseCardValveCode": "03 · valve-repair",
+    "caseCardValveTitle": "Valve and Equipment Repair",
+    "caseCardValveDesc": "Repair for pneumatic, water, and hydraulic valves plus compressed-air systems, with urgent on-site troubleshooting support."
   },
   "services": {
     "surface": { "title": "Surface Treatment", "vn": "Xử lý bề mặt", "desc": "Electroplating, chrome plating, sandblasting, grinding, polishing, coating and rubber lining" },
