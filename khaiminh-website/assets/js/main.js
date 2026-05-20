@@ -228,8 +228,17 @@
       try {
         window.open(gmailUrl, "_blank", "noopener");
       } catch (_) {
-        // Keep manual links fallback below.
+        // Keep fallback below.
       }
+      // Force a guaranteed action even when popup/mail client is blocked:
+      // redirect current tab to Gmail compose as final fallback.
+      setTimeout(() => {
+        try {
+          window.location.assign(gmailUrl);
+        } catch (_) {
+          // Keep status links as last resort.
+        }
+      }, 300);
 
       status.classList.add("success");
       status.textContent = "已嘗試開啟 Gmail 草稿。若沒有反應，請使用下方按鈕：";
