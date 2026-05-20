@@ -216,6 +216,16 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
     linear-gradient(135deg, rgba(21, 56, 82, .92), rgba(217, 168, 79, .22)),
     repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0 1px, transparent 1px 34px);
 }
+.case-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, transparent calc(50% - 1px), rgba(255,255,255,.88) calc(50% - 1px), rgba(255,255,255,.88) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(to bottom, transparent calc(50% - 1px), rgba(255,255,255,.88) calc(50% - 1px), rgba(255,255,255,.88) calc(50% + 1px), transparent calc(50% + 1px));
+}
 .case-surface .case-image,
 .case-valve .case-image,
 .case-machining .case-image {
@@ -228,21 +238,17 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
 .case-valve .case-image {
   background-image: linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("../img/cases/valve-repair/553462.jpg");
 }
-.case-image::before,
 .case-image::after {
   content: "";
   position: absolute;
   border: 1px solid rgba(255,255,255,.45);
 }
-.case-surface .case-image::before,
 .case-surface .case-image::after,
-.case-machining .case-image::before,
 .case-machining .case-image::after,
-.case-valve .case-image::before,
 .case-valve .case-image::after {
   display: none;
 }
-.case-surface .case-image::before {
+.case-surface .case-image .legacy-shape-before {
   left: 14%;
   top: 25%;
   width: 72%;
@@ -257,7 +263,7 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
   height: 12px;
   background: var(--gold);
 }
-.case-machining .case-image::before {
+.case-machining .case-image .legacy-shape-before {
   /* TODO: replace with real machining photo when available in assets/img/cases/precision-machining/ */
   left: 22%;
   top: 18%;
@@ -274,7 +280,7 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
   height: 58px;
   background: linear-gradient(90deg, #b9c0c0, #f8faf8);
 }
-.case-valve .case-image::before {
+.case-valve .case-image .legacy-shape-before {
   left: 18%;
   top: 30%;
   width: 64%;
