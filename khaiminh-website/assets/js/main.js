@@ -149,8 +149,8 @@
   initMaterialNoteField();
 
   if (form && status) {
-    form.addEventListener("submit", (event) => {
-      event.preventDefault();
+    const handleQuoteSubmit = (event) => {
+      if (event) event.preventDefault();
       const required = Array.from(form.querySelectorAll("[required]"));
       const missing = required.find((field) => !String(field.value).trim());
       const serviceChecked = form.querySelectorAll('input[name="services"]:checked').length > 0;
@@ -262,6 +262,15 @@
 
       status.appendChild(gmailLink);
       status.appendChild(copyButton);
-    });
+    };
+
+    form.addEventListener("submit", handleQuoteSubmit);
+
+    const submitButton = form.querySelector(".quote-submit");
+    if (submitButton) {
+      submitButton.addEventListener("click", (event) => {
+        handleQuoteSubmit(event);
+      });
+    }
   }
 })();
