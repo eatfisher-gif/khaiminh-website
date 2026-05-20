@@ -209,9 +209,30 @@
         `Factory visit: ${siteVisit}`
       ].join("\n");
 
-      window.location.href = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      try {
+        window.location.href = mailtoUrl;
+      } catch (_) {
+        try {
+          const tempLink = document.createElement("a");
+          tempLink.href = mailtoUrl;
+          tempLink.style.display = "none";
+          document.body.appendChild(tempLink);
+          tempLink.click();
+          tempLink.remove();
+        } catch (_) {
+          // Keep manual link fallback below.
+        }
+      }
+
       status.classList.add("success");
-      status.textContent = "已開啟 Email 草稿；請確認內容與附件後寄出。";
+      status.textContent = "已嘗試開啟 Email 草稿；若未自動開啟，請點連結手動開啟。";
+      const manualLink = document.createElement("a");
+      manualLink.href = mailtoUrl;
+      manualLink.textContent = "手動開啟 Email 草稿";
+      manualLink.style.marginLeft = "8px";
+      manualLink.style.textDecoration = "underline";
+      status.appendChild(manualLink);
     });
   }
 })();
