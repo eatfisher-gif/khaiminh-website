@@ -1,160 +1,141 @@
-/* ============================================
-   KHAI MINH GROUP — i18n 語系切換引擎
-   ============================================
-   原理：
-   1. 讀取 localStorage.km_lang，否則用瀏覽器語言推斷預設語系
-   2. fetch() 對應的 i18n/{lang}.json
-   3. 掃描所有 [data-i18n]、[data-i18n-placeholder]、[data-i18n-aria] 替換文字
-   4. <html lang> 屬性同步更新（SEO 與 a11y）
-   ============================================ */
-
+/* Khai Minh Group language switcher */
 (function () {
   'use strict';
 
   const SUPPORTED = ['tw', 'vn', 'en'];
   const STORAGE_KEY = 'km_lang';
   const HTML_LANG = { tw: 'zh-Hant', vn: 'vi', en: 'en' };
-
-  // 語系字典快取
   const cache = {};
+  let activeRequest = 0;
 
-  /**
-   * 由瀏覽器語言推斷預設語系
-   */
   function detectDefaultLang() {
-    const stored = localStorage.getItem(STORAGE_KEY);
+    const requested = new URLSearchParams(window.location.search).get('lang');
+    if (requested && SUPPORTED.includes(requested)) return requested;
+
+    let stored = null;
+    try {
+      stored = localStorage.getItem(STORAGE_KEY);
+    } catch (_) {
+      stored = null;
+    }
     if (stored && SUPPORTED.includes(stored)) return stored;
 
     const nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
     if (nav.startsWith('zh')) return 'tw';
     if (nav.startsWith('vi')) return 'vn';
-    return 'en';
+    return 'tw';
   }
 
-  /**
-   * 由 dot-path 取值，例如 "home.service_1_name"
-   */
   function getByPath(obj, path) {
-    return path.split('.').reduce((acc, key) => {
-      if (acc == null) return undefined;
+    return String(path).split('.').reduce((acc, key) => {
+      if (acc == null || typeof acc !== 'object') return undefined;
       return acc[key];
     }, obj);
   }
 
-  /**
-   * 載入指定語系 JSON
-   */
   async function loadDict(lang) {
     if (cache[lang]) return cache[lang];
+
+    const response = await fetch(`i18n/${lang}.json?v=20260521-1`, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Failed to load ${lang}: HTTP ${response.status}`);
+    const dict = await response.json();
+    cache[lang] = dict;
+    return dict;
+  }
+
+  function setText(el, value) {
+    if (typeof value === 'string') el.textContent = value;
+  }
+
+  function applyDict(dict) {
+    document.querySelectorAll('[data-i18n]').forEach((el) => {
+      setText(el, getByPath(dict, el.getAttribute('data-i18n')));
+    });
+
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+      const value = getByPath(dict, el.getAttribute('data-i18n-placeholder'));
+      if (typeof value === 'string') el.setAttribute('placeholder', value);
+    });
+
+    document.querySelectorAll('[data-i18n-aria]').forEach((el) => {
+      const value = getByPath(dict, el.getAttribute('data-i18n-aria'));
+      if (typeof value === 'string') el.setAttribute('aria-label', value);
+    });
+
+    document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+      const value = getByPath(dict, el.getAttribute('data-i18n-title'));
+      if (typeof value === 'string') el.setAttribute('title', value);
+    });
+  }
+
+  function updateSwitcher(lang, isLoading) {
+    document.querySelectorAll('.lang-switch button[data-lang]').forEach((btn) => {
+      const active = btn.getAttribute('data-lang') === lang;
+      btn.classList.toggle('active', active);
+      btn.disabled = !!isLoading;
+      btn.setAttribute('aria-pressed', String(active));
+    });
+    document.documentElement.classList.toggle('is-lang-loading', !!isLoading);
+  }
+
+  async function setLang(lang) {
+    const targetLang = SUPPORTED.includes(lang) ? lang : 'tw';
+    const requestId = ++activeRequest;
+
+    updateSwitcher(targetLang, true);
+
     try {
-      const res = await fetch(`i18n/${lang}.json`, { cache: 'force-cache' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      cache[lang] = await res.json();
-      return cache[lang];
+      const dict = await loadDict(targetLang);
+      if (requestId !== activeRequest) return;
+
+      try {
+        localStorage.setItem(STORAGE_KEY, targetLang);
+      } catch (_) {
+        // Private browsing or file previews can block storage.
+      }
+
+      applyDict(dict);
+      document.documentElement.setAttribute('lang', HTML_LANG[targetLang] || 'zh-Hant');
+      updateSwitcher(targetLang, false);
+      window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang: targetLang, dict } }));
     } catch (err) {
-      console.error('[i18n] 載入失敗:', lang, err);
-      // fallback 到 tw
-      if (lang !== 'tw') return loadDict('tw');
-      return {};
+      console.error('[i18n] language switch failed:', err);
+      if (targetLang !== 'tw') {
+        await setLang('tw');
+        return;
+      }
+      updateSwitcher(targetLang, false);
     }
   }
 
-  /**
-   * 套用字典到 DOM
-   */
-  function apply(dict) {
-    // 一般文字
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      const val = getByPath(dict, key);
-      if (typeof val === 'string') {
-        el.textContent = val;
-      }
-    });
-
-    // placeholder
-    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-      const key = el.getAttribute('data-i18n-placeholder');
-      const val = getByPath(dict, key);
-      if (typeof val === 'string') {
-        el.setAttribute('placeholder', val);
-      }
-    });
-
-    // aria-label
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-      const key = el.getAttribute('data-i18n-aria');
-      const val = getByPath(dict, key);
-      if (typeof val === 'string') {
-        el.setAttribute('aria-label', val);
-      }
-    });
-
-    // title 屬性
-    document.querySelectorAll('[data-i18n-title]').forEach(el => {
-      const key = el.getAttribute('data-i18n-title');
-      const val = getByPath(dict, key);
-      if (typeof val === 'string') {
-        el.setAttribute('title', val);
-      }
-    });
-  }
-
-  /**
-   * 切換到指定語系
-   */
-  async function setLang(lang) {
-    if (!SUPPORTED.includes(lang)) lang = 'tw';
-    localStorage.setItem(STORAGE_KEY, lang);
-
-    const dict = await loadDict(lang);
-    apply(dict);
-
-    // 更新 <html lang>
-    document.documentElement.setAttribute('lang', HTML_LANG[lang] || 'en');
-
-    // 更新切換按鈕狀態
-    document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
-      btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
-    });
-
-    // 廣播事件供 main.js 使用
-    window.dispatchEvent(new CustomEvent('langChanged', { detail: { lang, dict } }));
-  }
-
-  /**
-   * 取得當前字典（供其他 JS 模組讀取）
-   */
-  function getDict() {
-    const lang = localStorage.getItem(STORAGE_KEY) || detectDefaultLang();
-    return cache[lang] || {};
-  }
-
   function getLang() {
-    return localStorage.getItem(STORAGE_KEY) || detectDefaultLang();
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored && SUPPORTED.includes(stored)) return stored;
+    } catch (_) {
+      // Ignore storage errors.
+    }
+    return detectDefaultLang();
   }
 
-  /**
-   * 綁定切換按鈕
-   */
+  function getDict() {
+    return cache[getLang()] || {};
+  }
+
   function bindSwitcher() {
-    document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
+    document.querySelectorAll('.lang-switch button[data-lang]').forEach((btn) => {
       btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-lang');
-        setLang(target);
+        if (target && target !== getLang()) setLang(target);
       });
     });
   }
 
-  /**
-   * 初始化
-   */
   function init() {
     bindSwitcher();
     setLang(detectDefaultLang());
   }
 
-  // 暴露給其他模組
   window.KM_i18n = { setLang, getDict, getLang };
 
   if (document.readyState === 'loading') {

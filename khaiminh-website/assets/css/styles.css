@@ -114,12 +114,14 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 }
 .header-inner {
   max-width: var(--max-width);
+  width: 100%;
   margin: 0 auto;
   padding: 0 var(--space-xl);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: var(--space-lg);
+  min-width: 0;
 }
 .logo {
   display: flex;
@@ -145,8 +147,11 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 
 .nav {
   display: flex;
-  gap: 28px;
+  gap: clamp(14px, 2vw, 28px);
   align-items: center;
+  justify-content: center;
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 13px;
 }
 .nav a {
@@ -174,10 +179,12 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
   align-items: center;
   border-left: 0.5px solid var(--color-line);
   padding-left: 14px;
+  flex-shrink: 0;
 }
 .lang-switch button { font-size: 11px; color: var(--color-text-muted); padding: 4px; }
 .lang-switch button.active { color: var(--color-text); font-weight: 500; }
 .lang-switch button:hover { color: var(--color-accent-dark); }
+.lang-switch button:disabled { cursor: wait; opacity: 0.7; }
 
 .btn-primary {
   background: var(--color-accent);
@@ -190,8 +197,11 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  justify-content: center;
+  white-space: nowrap;
 }
 .btn-primary:hover { background: var(--color-accent-dark); color: white; }
+.header .btn-primary { flex-shrink: 0; }
 
 .btn-secondary {
   background: transparent;
@@ -998,6 +1008,12 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 /* ============================================
    響應式 mobile-first
    ============================================ */
+@media (max-width: 1180px) {
+  .header-inner { gap: 16px; }
+  .nav { gap: 16px; font-size: 12px; }
+  .header .btn-primary { display: none; }
+}
+
 @media (max-width: 768px) {
   .container, .container-narrow { padding: 0 20px; }
   .header-inner { padding: 0 20px; }
