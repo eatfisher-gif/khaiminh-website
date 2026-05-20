@@ -216,6 +216,19 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
     linear-gradient(135deg, rgba(21, 56, 82, .92), rgba(217, 168, 79, .22)),
     repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0 1px, transparent 1px 34px);
 }
+.case-image-grid {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  z-index: 1;
+}
+.case-image-cell {
+  background-size: cover;
+  background-position: center;
+}
 .case-surface .case-image,
 .case-valve .case-image,
 .case-machining .case-image {
@@ -292,7 +305,7 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
 }
 .case-carousel-controls {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   justify-content: space-between;
   width: 100%;
