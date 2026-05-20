@@ -48,7 +48,10 @@
     "caseCardMachiningDesc": "CNC, tiện phay, mài cắt và đặt hàng lô nhỏ, phối hợp theo bản vẽ và hiệu chỉnh kích thước tại hiện trường.",
     "caseCardValveCode": "03 · valve-repair",
     "caseCardValveTitle": "Sửa chữa van và thiết bị",
-    "caseCardValveDesc": "Sửa chữa van khí, van nước, van thủy lực và hệ thống khí nén, hỗ trợ kiểm tra nhanh tại hiện trường."
+    "caseCardValveDesc": "Sửa chữa van khí, van nước, van thủy lực và hệ thống khí nén, hỗ trợ kiểm tra nhanh tại hiện trường.",
+    "footerAddress": "??a ch? c?ng ty: (ch? c?p nh?t ??a ch? ch?nh th?c)",
+    "footerMap": "Google Map (ch? c?p nh?t li?n k?t ch?nh th?c)",
+    "footerHours": "Gi? l?m vi?c: Th? Hai - Th? B?y 08:00 - 17:30 (ch? x?c nh?n)"
   },
   "services": {
     "surface": {

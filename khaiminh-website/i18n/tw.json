@@ -48,7 +48,10 @@
     "caseCardMachiningDesc": "CNC、車銑、磨削與小批量訂製，配合圖面與現場尺寸修正。",
     "caseCardValveCode": "03 · valve-repair",
     "caseCardValveTitle": "閥件與設備維修",
-    "caseCardValveDesc": "氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。"
+    "caseCardValveDesc": "氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。",
+    "footerAddress": "?????????????",
+    "footerMap": "Google Map????????",
+    "footerHours": "?????????? 08:00 - 17:30?????"
   },
   "services": {
     "surface": {

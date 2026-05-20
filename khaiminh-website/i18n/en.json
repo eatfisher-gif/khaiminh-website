@@ -48,7 +48,10 @@
     "caseCardMachiningDesc": "CNC, turning/milling, grinding, and small-batch custom work based on drawings and site size adjustments.",
     "caseCardValveCode": "03 · valve-repair",
     "caseCardValveTitle": "Valve and Equipment Repair",
-    "caseCardValveDesc": "Repair for pneumatic, water, and hydraulic valves plus compressed-air systems, with urgent on-site troubleshooting support."
+    "caseCardValveDesc": "Repair for pneumatic, water, and hydraulic valves plus compressed-air systems, with urgent on-site troubleshooting support.",
+    "footerAddress": "Company address: (official address pending)",
+    "footerMap": "Google Map (official link pending)",
+    "footerHours": "Business hours: Mon - Sat 08:00 - 17:30 (pending confirmation)"
   },
   "services": {
     "surface": {
