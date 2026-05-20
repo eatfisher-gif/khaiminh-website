@@ -225,9 +225,14 @@
           // Keep manual link fallback below.
         }
       }
+      try {
+        window.open(gmailUrl, "_blank", "noopener");
+      } catch (_) {
+        // Keep manual links fallback below.
+      }
 
       status.classList.add("success");
-      status.textContent = "已嘗試開啟 Email 草稿。若沒有反應，請使用下方按鈕：";
+      status.textContent = "已嘗試開啟 Email 與 Gmail 草稿。若沒有反應，請使用下方按鈕：";
 
       const mailtoLink = document.createElement("a");
       mailtoLink.href = mailtoUrl;
