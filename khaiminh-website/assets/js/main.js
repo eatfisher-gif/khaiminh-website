@@ -49,12 +49,25 @@
   window.addEventListener("resize", updateFloatingContact);
   updateFloatingContact();
 
-  function initCaseCarousels() {
+  async function loadCaseManifest() {
+    try {
+      const response = await fetch("assets/case-manifest.json", { cache: "no-store" });
+      if (!response.ok) return {};
+      const payload = await response.json();
+      return payload && typeof payload === "object" ? payload : {};
+    } catch (_) {
+      return {};
+    }
+  }
+
+  async function initCaseCarousels() {
+    const manifest = await loadCaseManifest();
     const carousels = document.querySelectorAll("[data-case-carousel]");
     carousels.forEach(async (node) => {
-      const images = (node.dataset.caseImages || "")
-        .split(",")
-        .map((item) => item.trim())
+      const carouselKey = node.dataset.caseCarousel || "";
+      const manifestImages = Array.isArray(manifest?.[carouselKey]?.images) ? manifest[carouselKey].images : [];
+      const images = (manifestImages.length ? manifestImages : (node.dataset.caseImages || "").split(","))
+        .map((item) => String(item).trim())
         .filter(Boolean);
       if (!images.length) return;
 

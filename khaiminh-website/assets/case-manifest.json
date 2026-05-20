@@ -1,0 +1,25 @@
+{
+  "surface-treatment": {
+    "images": [
+      "assets/img/cases/surface-treatment/553460.jpg",
+      "assets/img/cases/surface-treatment/553461.jpg",
+      "assets/img/cases/surface-treatment/553462.jpg"
+    ]
+  },
+  "mechanical-engineering": {
+    "images": [
+      "assets/img/cases/mechanical-engineering/553502.jpg",
+      "assets/img/cases/mechanical-engineering/553503.jpg"
+    ]
+  },
+  "valve-repair": {
+    "images": [
+      "assets/img/cases/valve-repair/553462.jpg",
+      "assets/img/cases/valve-repair/553463.jpg",
+      "assets/img/cases/valve-repair/553464.jpg",
+      "assets/img/cases/valve-repair/553465.jpg",
+      "assets/img/cases/valve-repair/553466.jpg",
+      "assets/img/cases/valve-repair/553467.jpg"
+    ]
+  }
+}
