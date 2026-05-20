@@ -66,14 +66,13 @@
     carousels.forEach(async (node) => {
       const carouselKey = node.dataset.caseCarousel || "";
       const manifestImages = Array.isArray(manifest?.[carouselKey]?.images) ? manifest[carouselKey].images : [];
-      const images = (manifestImages.length ? manifestImages : (node.dataset.caseImages || "").split(","))
-        .map((item) => String(item).trim())
-        .filter(Boolean);
-      if (!images.length) return;
+      const dataImages = (node.dataset.caseImages || "").split(",").map((item) => String(item).trim()).filter(Boolean);
+      const preferredImages = manifestImages.length ? manifestImages : dataImages;
 
       const prefix = node.dataset.caseAltPrefix || "Case photo";
       let index = 0;
-      const imageSet = new Set(images);
+      const images = [];
+      const imageSet = new Set();
 
       function parseImagePath(path) {
         const match = path.match(/^(.*\/)(\d+)(\.[a-zA-Z0-9]+)$/);
@@ -88,6 +87,16 @@
           img.onerror = () => resolve(false);
           img.src = `${path}?v=${Date.now()}`;
         });
+      }
+
+      async function pushLoadableImages(candidateList) {
+        for (const path of candidateList) {
+          if (!path || imageSet.has(path)) continue;
+          const ok = await canLoadImage(path);
+          if (!ok) continue;
+          imageSet.add(path);
+          images.push(path);
+        }
       }
 
       async function discoverSequentialImages() {
@@ -105,6 +114,7 @@
 
       function render() {
         const imagePath = images[index];
+        if (!imagePath) return;
         node.style.backgroundImage = `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("${imagePath}")`;
         node.setAttribute("aria-label", `${prefix} ${index + 1}`);
       }
@@ -125,6 +135,12 @@
           render();
         });
       }
+
+      await pushLoadableImages(preferredImages);
+      if (!images.length && preferredImages !== dataImages) {
+        await pushLoadableImages(dataImages);
+      }
+      if (!images.length) return;
 
       render();
       await discoverSequentialImages();
