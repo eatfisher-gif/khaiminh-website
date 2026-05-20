@@ -1,7 +1,18 @@
 {
-  "brand": { "name": "開明集團" },
-  "nav": { "about": "關於", "services": "服務", "solutions": "方案", "cases": "實績", "news": "動態", "quote": "詢價" },
-  "contact": { "phoneShort": "電話" },
+  "brand": {
+    "name": "開明集團"
+  },
+  "nav": {
+    "about": "關於",
+    "services": "服務",
+    "solutions": "方案",
+    "cases": "實績",
+    "news": "動態",
+    "quote": "詢價"
+  },
+  "contact": {
+    "phoneShort": "電話"
+  },
   "home": {
     "chapter": "第壹章 · CHAPTER I",
     "heroTitle": "職人的こだわり，台商的信賴。",
@@ -40,12 +51,36 @@
     "caseCardValveDesc": "氣閥、水閥、液壓閥與空壓系統維修，支援急件現場排查。"
   },
   "services": {
-    "surface": { "title": "表面處理", "vn": "Xử lý bề mặt", "desc": "電鍍、鍍鉻、噴砂、研磨、拋光、噴塗、橡膠包覆" },
-    "machining": { "title": "精密機加工", "vn": "Gia công cơ khí", "desc": "銑削、車削、刨削、磨削、CNC 訂製" },
-    "mechanical": { "title": "機械工程", "vn": "Công trình cơ điện", "desc": "電力、給排水、空壓系統施工" },
-    "valve": { "title": "閥件維修", "vn": "Van công nghiệp", "desc": "氣閥、水閥、液壓閥買賣與維修" },
-    "trade": { "title": "進出口貿易", "vn": "Xuất nhập khẩu", "desc": "機械設備代購、關務與物流協調" },
-    "transfer": { "title": "技術轉讓", "vn": "Chuyển giao công nghệ", "desc": "製程顧問、設備改造、人員訓練" }
+    "surface": {
+      "title": "表面處理",
+      "vn": "Xử lý bề mặt",
+      "desc": "電鍍、鍍鉻、噴砂、研磨、拋光、噴塗、橡膠包覆"
+    },
+    "machining": {
+      "title": "精密機加工",
+      "vn": "Gia công cơ khí",
+      "desc": "銑削、車削、刨削、磨削、CNC 訂製"
+    },
+    "mechanical": {
+      "title": "機械工程",
+      "vn": "Công trình cơ điện",
+      "desc": "電力、給排水、空壓系統施工"
+    },
+    "valve": {
+      "title": "閥件維修",
+      "vn": "Van công nghiệp",
+      "desc": "氣閥、水閥、液壓閥買賣與維修"
+    },
+    "trade": {
+      "title": "進出口貿易",
+      "vn": "Xuất nhập khẩu",
+      "desc": "機械設備代購、關務與物流協調"
+    },
+    "transfer": {
+      "title": "技術轉讓",
+      "vn": "Chuyển giao công nghệ",
+      "desc": "製程顧問、設備改造、人員訓練"
+    }
   },
   "service": {
     "chapter": "第貳章 · SERVICE",
@@ -78,6 +113,30 @@
     "submit": "送出詢價",
     "directKicker": "直接聯絡",
     "directTitle": "急件可直接來電或用 Zalo 傳照片。",
-    "address": "同奈省福泰社，服務胡志明與周邊工業區。"
+    "address": "同奈省福泰社，服務胡志明與周邊工業區。",
+    "heroKicker": "REQUEST A QUOTE ? Y?U C?U B?O GI?",
+    "heroTitle": "???????24 ?????",
+    "heroText": "?????????????????????????????????",
+    "helpTitle": "??????",
+    "helpCallLabel": "????",
+    "step1": "????",
+    "step2": "????",
+    "step3": "????",
+    "step4": "????",
+    "servicesTitle": "???????",
+    "servicesTitleNote": "???",
+    "servicesIntro": "?????????????????????????",
+    "serviceSurfaceTitle": "????",
+    "serviceSurfaceDesc": "?? / ?? / ??",
+    "serviceMachiningTitle": "?????",
+    "serviceMachiningDesc": "CNC / ????",
+    "serviceMechanicalTitle": "????",
+    "serviceMechanicalDesc": "? / ? / ????",
+    "serviceValveTitle": "????",
+    "serviceValveDesc": "?? / ?? / ???",
+    "serviceTradeTitle": "?????",
+    "serviceTradeDesc": "?? / ?? / ??",
+    "serviceTransferTitle": "????",
+    "serviceTransferDesc": "???? / ????"
   }
 }

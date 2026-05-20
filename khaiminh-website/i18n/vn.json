@@ -1,7 +1,18 @@
 {
-  "brand": { "name": "Tập đoàn Khai Minh" },
-  "nav": { "about": "Giới thiệu", "services": "Dịch vụ", "solutions": "Giải pháp", "cases": "Dự án", "news": "Tin tức", "quote": "Báo giá" },
-  "contact": { "phoneShort": "Gọi" },
+  "brand": {
+    "name": "Tập đoàn Khai Minh"
+  },
+  "nav": {
+    "about": "Giới thiệu",
+    "services": "Dịch vụ",
+    "solutions": "Giải pháp",
+    "cases": "Dự án",
+    "news": "Tin tức",
+    "quote": "Báo giá"
+  },
+  "contact": {
+    "phoneShort": "Gọi"
+  },
   "home": {
     "chapter": "CHƯƠNG I",
     "heroTitle": "Tận tâm trong kỹ thuật, tin cậy cho nhà máy.",
@@ -40,12 +51,36 @@
     "caseCardValveDesc": "Sửa chữa van khí, van nước, van thủy lực và hệ thống khí nén, hỗ trợ kiểm tra nhanh tại hiện trường."
   },
   "services": {
-    "surface": { "title": "Xử lý bề mặt", "vn": "Xử lý bề mặt", "desc": "Mạ điện, mạ crom, phun cát, mài, đánh bóng, sơn phủ, bọc cao su" },
-    "machining": { "title": "Gia công cơ khí", "vn": "Gia công cơ khí", "desc": "Phay, tiện, bào, mài, CNC theo yêu cầu" },
-    "mechanical": { "title": "Cơ điện", "vn": "Công trình cơ điện", "desc": "Thi công điện, cấp thoát nước, hệ thống khí nén" },
-    "valve": { "title": "Sửa chữa van", "vn": "Van công nghiệp", "desc": "Mua bán và sửa chữa van khí, van nước, van thủy lực" },
-    "trade": { "title": "Xuất nhập khẩu", "vn": "Xuất nhập khẩu", "desc": "Mua hộ thiết bị, điều phối hải quan và logistics" },
-    "transfer": { "title": "Chuyển giao công nghệ", "vn": "Chuyển giao công nghệ", "desc": "Tư vấn quy trình, cải tạo thiết bị, đào tạo nhân viên" }
+    "surface": {
+      "title": "Xử lý bề mặt",
+      "vn": "Xử lý bề mặt",
+      "desc": "Mạ điện, mạ crom, phun cát, mài, đánh bóng, sơn phủ, bọc cao su"
+    },
+    "machining": {
+      "title": "Gia công cơ khí",
+      "vn": "Gia công cơ khí",
+      "desc": "Phay, tiện, bào, mài, CNC theo yêu cầu"
+    },
+    "mechanical": {
+      "title": "Cơ điện",
+      "vn": "Công trình cơ điện",
+      "desc": "Thi công điện, cấp thoát nước, hệ thống khí nén"
+    },
+    "valve": {
+      "title": "Sửa chữa van",
+      "vn": "Van công nghiệp",
+      "desc": "Mua bán và sửa chữa van khí, van nước, van thủy lực"
+    },
+    "trade": {
+      "title": "Xuất nhập khẩu",
+      "vn": "Xuất nhập khẩu",
+      "desc": "Mua hộ thiết bị, điều phối hải quan và logistics"
+    },
+    "transfer": {
+      "title": "Chuyển giao công nghệ",
+      "vn": "Chuyển giao công nghệ",
+      "desc": "Tư vấn quy trình, cải tạo thiết bị, đào tạo nhân viên"
+    }
   },
   "service": {
     "chapter": "CHƯƠNG II · DỊCH VỤ",
@@ -78,6 +113,30 @@
     "submit": "Gửi yêu cầu",
     "directKicker": "Liên hệ trực tiếp",
     "directTitle": "Việc gấp có thể gọi hoặc gửi ảnh qua Zalo.",
-    "address": "Xã Phước Thái, Đồng Nai; phục vụ TP.HCM và các KCN lân cận."
+    "address": "Xã Phước Thái, Đồng Nai; phục vụ TP.HCM và các KCN lân cận.",
+    "heroKicker": "REQUEST A QUOTE ? Y?U C?U B?O GI?",
+    "heroTitle": "G?i b?n v? online, ph?n h?i trong 24 gi?",
+    "heroText": "?i?n nhu c?u v? ??nh k?m b?n v? ho?c ?nh hi?n tr??ng, ch?ng t?i s? ph?n h?i quy tr?nh kh? thi, ti?n ?? v? h??ng b?o gi?.",
+    "helpTitle": "Kh?ng mu?n ?i?n bi?u m?u?",
+    "helpCallLabel": "(Ti?ng Hoa)",
+    "step1": "Ch?n d?ch v?",
+    "step2": "Y?u c?u k? thu?t",
+    "step3": "B?n v? / t?p ??nh k?m",
+    "step4": "Th?ng tin li?n h?",
+    "servicesTitle": "B?n c?n d?ch v? n?o?",
+    "servicesTitleNote": "C? th? ch?n nhi?u",
+    "servicesIntro": "Ch?n c?c h?ng m?c d?ch v? c?n l?n n?y; m?i h?ng m?c c? th? b?o gi? ri?ng ho?c g?p g?i.",
+    "serviceSurfaceTitle": "X? l? b? m?t",
+    "serviceSurfaceDesc": "M? ?i?n / m? crom / phun c?t",
+    "serviceMachiningTitle": "Gia c?ng ch?nh x?c",
+    "serviceMachiningDesc": "CNC / phay ti?n b?o m?i",
+    "serviceMechanicalTitle": "C? kh? c?ng tr?nh",
+    "serviceMechanicalDesc": "?i?n / n??c / kh? n?n",
+    "serviceValveTitle": "S?a ch?a van",
+    "serviceValveDesc": "Van kh? / van n??c / van th?y l?c",
+    "serviceTradeTitle": "Xu?t nh?p kh?u",
+    "serviceTradeDesc": "Mua h? / khai quan / logistics",
+    "serviceTransferTitle": "Chuy?n giao k? thu?t",
+    "serviceTransferDesc": "T? v?n quy tr?nh / ??o t?o"
   }
 }

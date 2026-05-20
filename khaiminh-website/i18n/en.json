@@ -1,7 +1,18 @@
 {
-  "brand": { "name": "Khai Minh Group" },
-  "nav": { "about": "About", "services": "Services", "solutions": "Solutions", "cases": "Work", "news": "Updates", "quote": "Quote" },
-  "contact": { "phoneShort": "Call" },
+  "brand": {
+    "name": "Khai Minh Group"
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "solutions": "Solutions",
+    "cases": "Work",
+    "news": "Updates",
+    "quote": "Quote"
+  },
+  "contact": {
+    "phoneShort": "Call"
+  },
   "home": {
     "chapter": "CHAPTER I",
     "heroTitle": "Craft detail, trusted factory support.",
@@ -40,12 +51,36 @@
     "caseCardValveDesc": "Repair for pneumatic, water, and hydraulic valves plus compressed-air systems, with urgent on-site troubleshooting support."
   },
   "services": {
-    "surface": { "title": "Surface Treatment", "vn": "Xử lý bề mặt", "desc": "Electroplating, chrome plating, sandblasting, grinding, polishing, coating and rubber lining" },
-    "machining": { "title": "Precision Machining", "vn": "Gia công cơ khí", "desc": "Milling, turning, planing, grinding and custom CNC work" },
-    "mechanical": { "title": "Mechanical Engineering", "vn": "Công trình cơ điện", "desc": "Electrical, water supply/drainage and compressed air system work" },
-    "valve": { "title": "Valve Repair", "vn": "Van công nghiệp", "desc": "Sales and repair for pneumatic, water and hydraulic valves" },
-    "trade": { "title": "Import / Export", "vn": "Xuất nhập khẩu", "desc": "Equipment sourcing, customs and logistics coordination" },
-    "transfer": { "title": "Technology Transfer", "vn": "Chuyển giao công nghệ", "desc": "Process consulting, equipment upgrades and staff training" }
+    "surface": {
+      "title": "Surface Treatment",
+      "vn": "Xử lý bề mặt",
+      "desc": "Electroplating, chrome plating, sandblasting, grinding, polishing, coating and rubber lining"
+    },
+    "machining": {
+      "title": "Precision Machining",
+      "vn": "Gia công cơ khí",
+      "desc": "Milling, turning, planing, grinding and custom CNC work"
+    },
+    "mechanical": {
+      "title": "Mechanical Engineering",
+      "vn": "Công trình cơ điện",
+      "desc": "Electrical, water supply/drainage and compressed air system work"
+    },
+    "valve": {
+      "title": "Valve Repair",
+      "vn": "Van công nghiệp",
+      "desc": "Sales and repair for pneumatic, water and hydraulic valves"
+    },
+    "trade": {
+      "title": "Import / Export",
+      "vn": "Xuất nhập khẩu",
+      "desc": "Equipment sourcing, customs and logistics coordination"
+    },
+    "transfer": {
+      "title": "Technology Transfer",
+      "vn": "Chuyển giao công nghệ",
+      "desc": "Process consulting, equipment upgrades and staff training"
+    }
   },
   "service": {
     "chapter": "CHAPTER II · SERVICE",
@@ -78,6 +113,30 @@
     "submit": "Submit Request",
     "directKicker": "Direct Contact",
     "directTitle": "For urgent work, call directly or send photos through Zalo.",
-    "address": "Phuoc Thai, Dong Nai; serving Ho Chi Minh City and nearby industrial zones."
+    "address": "Phuoc Thai, Dong Nai; serving Ho Chi Minh City and nearby industrial zones.",
+    "heroKicker": "REQUEST A QUOTE ? Y?U C?U B?O GI?",
+    "heroTitle": "Submit drawings online, get a reply within 24 hours",
+    "heroText": "Fill in your requirements and attach drawings or site photos. We will reply with feasible process options, lead time, and pricing direction.",
+    "helpTitle": "Prefer not to fill out the form?",
+    "helpCallLabel": "(Chinese)",
+    "step1": "Select Services",
+    "step2": "Technical Requirements",
+    "step3": "Drawings / Attachments",
+    "step4": "Contact Info",
+    "servicesTitle": "What services do you need?",
+    "servicesTitleNote": "Multiple selection",
+    "servicesIntro": "Select required service items. Each item can be quoted separately or bundled.",
+    "serviceSurfaceTitle": "Surface Treatment",
+    "serviceSurfaceDesc": "Electroplating / Chrome / Sandblasting",
+    "serviceMachiningTitle": "Precision Machining",
+    "serviceMachiningDesc": "CNC / Milling / Turning / Grinding",
+    "serviceMechanicalTitle": "Mechanical Engineering",
+    "serviceMechanicalDesc": "Electrical / Water / Compressed Air",
+    "serviceValveTitle": "Valve Repair",
+    "serviceValveDesc": "Pneumatic / Water / Hydraulic Valves",
+    "serviceTradeTitle": "Import / Export",
+    "serviceTradeDesc": "Sourcing / Customs / Logistics",
+    "serviceTransferTitle": "Technology Transfer",
+    "serviceTransferDesc": "Process Consulting / Training"
   }
 }
