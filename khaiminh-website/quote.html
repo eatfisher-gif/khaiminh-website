@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-Hant" data-page="quote">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="開明集團詢價單，支援表面處理、精密機加工、機械工程、閥件維修與設備採購需求。">
+  <title>詢價單 | 開明集團 KHAI MINH</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <header class="site-header" data-header>
+    <a class="brand" href="index.html" aria-label="Khai Minh"><span class="brand-mark">開</span><span><strong data-i18n="brand.name">開明集團</strong><small data-config="companyName">KHAI MINH GROUP</small></span></a>
+    <button class="nav-toggle" type="button" data-nav-toggle aria-label="Menu"><span></span><span></span><span></span></button>
+    <nav class="site-nav" data-nav>
+      <a href="index.html#about" data-i18n="nav.about">關於</a>
+      <a href="service.html" data-i18n="nav.services">服務</a>
+      <a href="index.html#solutions" data-i18n="nav.solutions">方案</a>
+      <a href="index.html#cases" data-i18n="nav.cases">實績</a>
+      <a href="index.html#news" data-i18n="nav.news">動態</a>
+      <div class="language-switcher"><button type="button" data-lang="tw">繁中</button><button type="button" data-lang="vn">VN</button><button type="button" data-lang="en">EN</button></div>
+      <a class="btn btn-gold" href="quote.html" data-i18n="nav.quote">詢價</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="quote-pro-hero">
+      <div>
+        <p class="quote-kicker">REQUEST A QUOTE · YÊU CẦU BÁO GIÁ</p>
+        <h1>線上提交圖面，24 小時內回覆</h1>
+        <p>填寫越完整，評估越精準。所有資料僅用於報價與工程討論，不外流。</p>
+      </div>
+      <aside class="quote-help-card">
+        <strong>不想填表單？</strong>
+        <a href="tel:+84908421410" data-config-href="phoneHrefTel"><span data-config="phoneDisplay">0908 421 410</span>（中文）</a>
+        <a href="https://zalo.me/84908421410" data-config-href="zaloUrl" target="_blank" rel="noopener">Zalo <span data-config="phoneDisplay">0908 421 410</span></a>
+        <a href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto" data-config="email">khaiminhgroup11668@gmail.com</a>
+      </aside>
+    </section>
+
+    <section class="quote-steps" aria-label="Quote steps">
+      <div class="active"><span>1</span><strong>選擇服務</strong></div>
+      <div><span>2</span><strong>需求規格</strong></div>
+      <div><span>3</span><strong>圖面附件</strong></div>
+      <div><span>4</span><strong>聯絡方式</strong></div>
+    </section>
+
+    <section class="section quote-pro-section">
+      <form class="quote-form quote-pro-form" data-quote-form data-config-recipient data-recipient="khaiminhgroup11668@gmail.com">
+        <section class="form-block">
+          <div class="form-heading">
+            <h2>需要哪些服務？ <small>可複選</small></h2>
+            <p>勾選此次需要的服務項目，每項可單獨報價或包套處理。</p>
+          </div>
+          <div class="service-picker" data-required-group="services">
+            <label class="service-option">
+              <input type="checkbox" name="services" value="表面處理" checked>
+              <span><strong>表面處理</strong><small>電鍍 / 鍍鉻 / 噴砂</small></span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox" name="services" value="精密機加工">
+              <span><strong>精密機加工</strong><small>CNC / 銑車刨磨</small></span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox" name="services" value="機械工程">
+              <span><strong>機械工程</strong><small>電 / 水 / 空壓系統</small></span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox" name="services" value="閥件採購維修">
+              <span><strong>閥件採購</strong><small>氣 / 水 / 液壓閥</small></span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox" name="services" value="機械進出口">
+              <span><strong>機械進出口</strong><small>設備代購報關</small></span>
+            </label>
+            <label class="service-option">
+              <input type="checkbox" name="services" value="技術轉讓">
+              <span><strong>技術轉讓</strong><small>製程顧問 / 訓練</small></span>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-block">
+          <div class="form-heading">
+            <h2>表面處理需求細節</h2>
+            <p>這些資訊幫助我們快速判斷製程、材料相容性與交期。</p>
+          </div>
+          <div class="form-grid">
+            <label>
+              <span>處理製程 <b>*</b></span>
+              <select name="process" required>
+                <option value="">請選擇處理製程</option>
+                <option>電鍍</option>
+                <option>鍍鉻</option>
+                <option>噴砂</option>
+                <option>研磨 / 拋光</option>
+                <option>噴塗</option>
+                <option>橡膠包覆</option>
+                <option>其他 / 需評估</option>
+              </select>
+            </label>
+            <label>
+              <span>材質</span>
+              <select name="material">
+                <option value="">請選擇材質</option>
+                <option>碳鋼</option>
+                <option>不鏽鋼</option>
+                <option>鋁</option>
+                <option>銅</option>
+                <option>塑膠 / 橡膠</option>
+                <option>其他 / 不確定</option>
+              </select>
+            </label>
+            <label>
+              <span>零件尺寸（長 × 寬 × 高 mm）</span>
+              <input name="part_size" type="text" placeholder="例：500 × 300 × 150">
+            </label>
+            <label>
+              <span>數量 <b>*</b></span>
+              <div class="inline-fields">
+                <input name="quantity" type="number" min="1" placeholder="50" required>
+                <select name="quantity_unit">
+                  <option>件</option>
+                  <option>組</option>
+                  <option>批</option>
+                  <option>套</option>
+                </select>
+              </div>
+            </label>
+            <label>
+              <span>頻率</span>
+              <select name="frequency">
+                <option>一次性訂單</option>
+                <option>每週固定</option>
+                <option>每月固定</option>
+                <option>長期配合</option>
+              </select>
+            </label>
+            <label>
+              <span>期望交期</span>
+              <select name="deadline">
+                <option>越快越好（急件）</option>
+                <option>1 週內</option>
+                <option>2 週內</option>
+                <option>1 個月內</option>
+                <option>可討論</option>
+              </select>
+            </label>
+            <label class="full">
+              <span>特殊要求 / 規格說明</span>
+              <textarea name="message" rows="5" placeholder="例：膜厚 25μm、需通過鹽霧 480 小時測試、客戶要求 RoHS 認證..." required></textarea>
+            </label>
+          </div>
+        </section>
+
+        <section class="form-block">
+          <div class="form-heading">
+            <h2>圖面 / 樣品照片</h2>
+            <p>上傳工程圖（PDF/DWG）或實物照片，可加快報價速度。</p>
+          </div>
+          <label class="upload-zone">
+            <input name="attachment" type="file" accept="image/*,.pdf,.dwg,.dxf,.zip" multiple>
+            <span class="upload-icon">+</span>
+            <strong>拖曳檔案到此，或點擊選擇</strong>
+            <small>支援 PDF / DWG / JPG / PNG / ZIP。Email 草稿開啟後，請手動附上檔案。</small>
+          </label>
+          <p class="privacy-note">你上傳或提供的圖面僅供開明集團報價與工程評估使用，不會外流或轉作他用。</p>
+        </section>
+
+        <section class="form-block">
+          <div class="form-heading">
+            <h2>聯絡方式</h2>
+            <p>留下採購或工程窗口，方便我們補問規格與安排報價。</p>
+          </div>
+          <div class="form-grid">
+            <label>
+              <span>姓名 <b>*</b></span>
+              <input name="name" type="text" autocomplete="name" placeholder="王先生" required>
+            </label>
+            <label>
+              <span>職稱</span>
+              <input name="title" type="text" placeholder="採購經理 / 廠長 / 工程師">
+            </label>
+            <label>
+              <span>公司名稱 <b>*</b></span>
+              <input name="company" type="text" autocomplete="organization" placeholder="台塑越南有限公司" required>
+            </label>
+            <label>
+              <span>產業類別</span>
+              <select name="industry">
+                <option value="">請選擇</option>
+                <option>塑膠 / 橡膠</option>
+                <option>金屬加工</option>
+                <option>電子 / 電機</option>
+                <option>食品 / 包裝</option>
+                <option>紡織 / 製鞋</option>
+                <option>其他製造業</option>
+              </select>
+            </label>
+            <label>
+              <span>電話 / Zalo <b>*</b></span>
+              <input name="phone" type="tel" autocomplete="tel" placeholder="+84 90 xxx xxxx" required>
+            </label>
+            <label>
+              <span>Email <b>*</b></span>
+              <input name="email" type="email" autocomplete="email" placeholder="purchasing@company.com" required>
+            </label>
+            <label>
+              <span>所在工業區 / 城市</span>
+              <select name="location">
+                <option value="">請選擇</option>
+                <option>同奈 Dong Nai</option>
+                <option>胡志明 Ho Chi Minh City</option>
+                <option>平陽 Binh Duong</option>
+                <option>隆安 Long An</option>
+                <option>巴地頭頓 Ba Ria - Vung Tau</option>
+                <option>其他地區</option>
+              </select>
+            </label>
+            <fieldset class="radio-group">
+              <legend>偏好聯絡方式</legend>
+              <label><input type="radio" name="preferred_contact" value="電話" checked> 電話</label>
+              <label><input type="radio" name="preferred_contact" value="Email"> Email</label>
+              <label><input type="radio" name="preferred_contact" value="Zalo"> Zalo</label>
+            </fieldset>
+          </div>
+          <label class="visit-check">
+            <input type="checkbox" name="site_visit" value="需要預約免費廠房參觀">
+            <span>同時預約免費廠房參觀，看現場最直接，眼見為憑。</span>
+          </label>
+        </section>
+
+        <div class="form-status" data-form-status role="status"></div>
+        <button class="btn btn-gold full quote-submit" type="submit">產生 Email 詢價單</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div><strong data-i18n="brand.name">開明集團</strong><p><span data-config="companyName">KHAI MINH GROUP</span> · MST <span data-config="taxCode">3604066672</span></p></div><div><a href="tel:+84908421410" data-config-href="phoneHrefTel" data-config="phoneDisplay">0908 421 410</a><a href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto" data-config="email">khaiminhgroup11668@gmail.com</a></div></footer>
+  <div class="floating-contact" data-floating-contact><a class="zalo" href="https://zalo.me/84908421410" data-config-href="zaloUrl" target="_blank" rel="noopener">Zalo</a><a class="phone" href="tel:+84908421410" data-config-href="phoneHrefTel" data-i18n="contact.phoneShort">電話</a><a class="email" href="mailto:khaiminhgroup11668@gmail.com" data-config-href="emailMailto">Email</a></div>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/i18n.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
