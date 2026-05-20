@@ -485,6 +485,35 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
   height: 140px;
   position: relative;
   overflow: hidden;
+  background: #1A3A52;
+}
+.project-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  width: 100%;
+  height: 100%;
+}
+.project-photo-grid img,
+.project-photo-fallback {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  object-fit: cover;
+}
+.project-photo-grid img {
+  display: block;
+}
+.project-photo-fallback {
+  background:
+    linear-gradient(135deg, rgba(212, 168, 87, 0.22), rgba(26, 58, 82, 0.28)),
+    linear-gradient(135deg, #A8842F 0%, #6B5318 100%);
+}
+.project-photo-grid--placeholder .project-photo-fallback:nth-child(2),
+.project-photo-grid--placeholder .project-photo-fallback:nth-child(3) {
+  background:
+    linear-gradient(135deg, rgba(245, 242, 235, 0.12), rgba(26, 58, 82, 0.25)),
+    linear-gradient(135deg, #8E6F22 0%, #1A3A52 100%);
 }
 .project-img-tag {
   position: absolute;
