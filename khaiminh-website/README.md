@@ -11,6 +11,7 @@ khaiminh-website/
 ├── quote.html
 ├── assets/
 │   ├── css/styles.css
+│   ├── img/cases/
 │   └── js/
 │       ├── config.js
 │       ├── i18n.js
