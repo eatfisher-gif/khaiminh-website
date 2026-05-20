@@ -58,6 +58,26 @@ Use the category folders there:
 
 See `assets/img/cases/README.md` before publishing real customer photos.
 
+### Auto Update Case Manifest
+
+After adding photos into `assets/img/cases/<category>/`, run:
+
+```powershell
+python rebuild_case_manifest.py
+```
+
+or just double-click:
+
+```text
+update_case_manifest.bat
+```
+
+This will auto-rebuild:
+
+```text
+assets/case-manifest.json
+```
+
 ## Before Launch
 
 1. Confirm contact settings in `assets/js/config.js`:
