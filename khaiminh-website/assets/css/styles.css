@@ -202,6 +202,9 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
 .case-image {
   position: relative;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   background:
     linear-gradient(135deg, rgba(21, 56, 82, .92), rgba(217, 168, 79, .22)),
     repeating-linear-gradient(90deg, rgba(255,255,255,.14) 0 1px, transparent 1px 34px);
@@ -275,6 +278,29 @@ h2 { font-size: clamp(32px, 4.5vw, 58px); line-height: 1.24; letter-spacing: 0; 
   height: 70%;
   border-radius: 12px;
   background: rgba(217, 168, 79, .75);
+}
+.case-carousel-controls {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px;
+}
+.case-carousel-btn {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(255, 255, 255, .75);
+  background: rgba(21, 56, 82, .5);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+}
+.case-carousel-btn:hover {
+  background: rgba(21, 56, 82, .78);
 }
 
 .band { background: var(--ink); color: var(--white); }

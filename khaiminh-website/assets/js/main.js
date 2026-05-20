@@ -49,6 +49,47 @@
   window.addEventListener("resize", updateFloatingContact);
   updateFloatingContact();
 
+  function initCaseCarousels() {
+    const carousels = document.querySelectorAll("[data-case-carousel]");
+    carousels.forEach((node) => {
+      const images = (node.dataset.caseImages || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+      if (!images.length) return;
+
+      const prefix = node.dataset.caseAltPrefix || "Case photo";
+      let index = 0;
+
+      function render() {
+        const imagePath = images[index];
+        node.style.backgroundImage = `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("${imagePath}")`;
+        node.setAttribute("aria-label", `${prefix} ${index + 1}`);
+      }
+
+      const prevBtn = node.querySelector("[data-case-prev]");
+      const nextBtn = node.querySelector("[data-case-next]");
+
+      if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+          index = (index - 1 + images.length) % images.length;
+          render();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+          index = (index + 1) % images.length;
+          render();
+        });
+      }
+
+      render();
+    });
+  }
+
+  initCaseCarousels();
+
   if (form && status) {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
