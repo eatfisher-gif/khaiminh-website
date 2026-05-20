@@ -73,9 +73,6 @@
       let index = 0;
       const images = [];
       const imageSet = new Set();
-      const gridCells = Array.from(node.querySelectorAll("[data-case-cell]"));
-      const isGridMode = gridCells.length > 0;
-      const step = isGridMode ? 4 : 1;
 
       function parseImagePath(path) {
         const match = path.match(/^(.*\/)(\d+)(\.[a-zA-Z0-9]+)$/);
@@ -116,18 +113,8 @@
       }
 
       function render() {
-        if (!images.length) return;
-        if (isGridMode) {
-          gridCells.forEach((cell, cellIndex) => {
-            const imagePath = images[(index + cellIndex) % images.length];
-            cell.style.backgroundImage = `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("${imagePath}")`;
-            cell.setAttribute("aria-label", `${prefix} ${((index + cellIndex) % images.length) + 1}`);
-          });
-          node.setAttribute("aria-label", `${prefix} ${index + 1}`);
-          return;
-        }
-
         const imagePath = images[index];
+        if (!imagePath) return;
         node.style.backgroundImage = `linear-gradient(180deg, rgba(21, 56, 82, .08), rgba(21, 56, 82, .28)), url("${imagePath}")`;
         node.setAttribute("aria-label", `${prefix} ${index + 1}`);
       }
@@ -137,14 +124,14 @@
 
       if (prevBtn) {
         prevBtn.addEventListener("click", () => {
-          index = (index - step + images.length) % images.length;
+          index = (index - 1 + images.length) % images.length;
           render();
         });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", () => {
-          index = (index + step) % images.length;
+          index = (index + 1) % images.length;
           render();
         });
       }
