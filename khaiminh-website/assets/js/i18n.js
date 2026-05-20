@@ -36,7 +36,7 @@
   async function loadDict(lang) {
     if (cache[lang]) return cache[lang];
 
-    const response = await fetch(`i18n/${lang}.json?v=20260521-1`, { cache: 'no-store' });
+    const response = await fetch(`i18n/${lang}.json?v=20260521-2`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`Failed to load ${lang}: HTTP ${response.status}`);
     const dict = await response.json();
     cache[lang] = dict;
@@ -108,6 +108,16 @@
     }
   }
 
+  function preloadLanguages() {
+    SUPPORTED.forEach((lang) => {
+      if (!cache[lang]) {
+        loadDict(lang).catch((err) => {
+          console.warn('[i18n] preload failed:', lang, err);
+        });
+      }
+    });
+  }
+
   function getLang() {
     try {
       const stored = localStorage.getItem(STORAGE_KEY);
@@ -133,7 +143,7 @@
 
   function init() {
     bindSwitcher();
-    setLang(detectDefaultLang());
+    setLang(detectDefaultLang()).finally(preloadLanguages);
   }
 
   window.KM_i18n = { setLang, getDict, getLang };
