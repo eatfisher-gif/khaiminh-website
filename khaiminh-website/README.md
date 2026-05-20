@@ -39,6 +39,25 @@ To change phone, Zalo, email, tax code or service area later, update only:
 assets/js/config.js
 ```
 
+## Case Photos
+
+Project photos are grouped by service category under:
+
+```text
+assets/img/cases/
+```
+
+Use the category folders there:
+
+- `surface-treatment/`
+- `precision-machining/`
+- `mechanical-engineering/`
+- `valve-repair/`
+- `import-export/`
+- `technology-transfer/`
+
+See `assets/img/cases/README.md` before publishing real customer photos.
+
 ## Before Launch
 
 1. Confirm contact settings in `assets/js/config.js`:
