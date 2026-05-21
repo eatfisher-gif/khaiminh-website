@@ -14,7 +14,7 @@
   /* ============== 設定 ============== */
   // ⚠ 上線前換成你的 Formspree endpoint
   // 取得方式：https://formspree.io → New Form → 拿到 https://formspree.io/f/xxxxxxxx
-  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mvzyklbp';
 
   const MAX_FILE_SIZE = 25 * 1024 * 1024;  // 25 MB
   const MAX_FILES = 5;
