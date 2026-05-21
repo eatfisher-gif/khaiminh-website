@@ -215,15 +215,15 @@
 
     "step_1": "選擇服務",
     "step_2": "需求規格",
-    "step_3": "圖面附件",
+    "step_3": "圖檔傳送",
     "step_4": "聯絡方式",
 
     "sec_1_title": "需要哪些服務？",
     "sec_1_sub": "可複選，每項可單獨報價或包套處理",
     "sec_2_title": "表面處理需求細節",
     "sec_2_sub": "這些資訊幫助我們快速報價",
-    "sec_3_title": "圖面 / 樣品照片",
-    "sec_3_sub": "上傳工程圖（PDF/DWG）或實物照片，加快報價速度",
+    "sec_3_title": "圖檔傳送方式",
+    "sec_3_sub": "為加快報價速度,工程圖請透過 LINE / Zalo / Email 傳送,工程師團隊將同步處理",
     "sec_4_title": "聯絡方式",
 
     "f_process": "處理製程",
@@ -251,9 +251,9 @@
     "due_4": "1 個月內",
     "due_5": "彈性",
 
-    "upload_title": "拖曳檔案到此，或點擊上傳",
-    "upload_sub": "支援 PDF / DWG / JPG / PNG / ZIP · 單檔上限 25MB",
-    "upload_nda": "您上傳的圖面我們會簽 NDA，絕不外流或轉作他用",
+    "f_channel_note": "您將使用哪個管道傳送圖檔?(選填,幫助我們對應)",
+    "f_channel_note_placeholder": "例:稍後 LINE 傳 / Email 已寄出 / 還沒準備好圖檔,可先報概略價",
+    "upload_nda": "您傳送的圖面我們會簽 NDA,絕不外流或轉作他用",
 
     "f_name": "姓名",
     "f_name_placeholder": "王先生",

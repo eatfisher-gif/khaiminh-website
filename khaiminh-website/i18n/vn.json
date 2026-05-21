@@ -215,15 +215,15 @@
 
     "step_1": "Chọn dịch vụ",
     "step_2": "Yêu cầu kỹ thuật",
-    "step_3": "Bản vẽ / Ảnh",
+    "step_3": "Send Files",
     "step_4": "Liên hệ",
 
     "sec_1_title": "Bạn cần dịch vụ nào?",
     "sec_1_sub": "Có thể chọn nhiều, mỗi mục báo giá riêng hoặc gộp",
     "sec_2_title": "Chi tiết yêu cầu xử lý bề mặt",
     "sec_2_sub": "Thông tin này giúp chúng tôi báo giá nhanh hơn",
-    "sec_3_title": "Bản vẽ / Ảnh mẫu",
-    "sec_3_sub": "Upload bản vẽ kỹ thuật (PDF/DWG) hoặc ảnh thực tế",
+    "sec_3_title": "How to Send Drawings",
+    "sec_3_sub": "For faster quotation, please send drawings via LINE / Zalo / Email — our engineering team will process them in parallel",
     "sec_4_title": "Thông tin liên hệ",
 
     "f_process": "Quy trình xử lý",
@@ -251,9 +251,9 @@
     "due_4": "Trong 1 tháng",
     "due_5": "Linh hoạt",
 
-    "upload_title": "Kéo thả file vào đây hoặc click để upload",
-    "upload_sub": "Hỗ trợ PDF / DWG / JPG / PNG / ZIP · Tối đa 25MB",
-    "upload_nda": "Bản vẽ upload sẽ được ký NDA, tuyệt đối bảo mật",
+    "f_channel_note": "Which channel will you use? (Optional — helps us match your inquiry)",
+    "f_channel_note_placeholder": "e.g. Will send via LINE later / Already emailed / No drawings yet, please give a rough estimate",
+    "upload_nda": "All drawings you send are covered by NDA — never shared or reused",
 
     "f_name": "Họ tên",
     "f_name_placeholder": "Anh Wang",

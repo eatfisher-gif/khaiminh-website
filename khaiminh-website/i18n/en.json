@@ -215,15 +215,15 @@
 
     "step_1": "Pick services",
     "step_2": "Requirements",
-    "step_3": "Drawings",
+    "step_3": "Send Files",
     "step_4": "Contact",
 
     "sec_1_title": "Which services do you need?",
     "sec_1_sub": "Multi-select. Quote separately or as a package",
     "sec_2_title": "Surface treatment specs",
     "sec_2_sub": "Helps us quote faster",
-    "sec_3_title": "Drawings / Sample photos",
-    "sec_3_sub": "Upload engineering drawings (PDF/DWG) or actual photos",
+    "sec_3_title": "How to Send Drawings",
+    "sec_3_sub": "For faster quotation, please send drawings via LINE / Zalo / Email — our engineering team will process them in parallel",
     "sec_4_title": "Contact details",
 
     "f_process": "Process",
@@ -251,9 +251,9 @@
     "due_4": "Within 1 month",
     "due_5": "Flexible",
 
-    "upload_title": "Drag files here or click to upload",
-    "upload_sub": "PDF / DWG / JPG / PNG / ZIP · 25MB per file",
-    "upload_nda": "We sign NDA on your drawings — strictly confidential",
+    "f_channel_note": "Which channel will you use? (Optional — helps us match your inquiry)",
+    "f_channel_note_placeholder": "e.g. Will send via LINE later / Already emailed / No drawings yet, please give a rough estimate",
+    "upload_nda": "All drawings you send are covered by NDA — never shared or reused",
 
     "f_name": "Name",
     "f_name_placeholder": "Mr. Wang",

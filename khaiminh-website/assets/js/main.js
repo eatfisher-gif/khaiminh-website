@@ -16,10 +16,6 @@
   // 取得方式：https://formspree.io → New Form → 拿到 https://formspree.io/f/xxxxxxxx
   const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mvzyklbp';
 
-  const MAX_FILE_SIZE = 25 * 1024 * 1024;  // 25 MB
-  const MAX_FILES = 5;
-  const ALLOWED_EXT = ['pdf', 'dwg', 'dxf', 'jpg', 'jpeg', 'png', 'zip', 'step', 'stp', 'igs'];
-
   /* ============== 共用：i18n 文字取用 ============== */
   function t(key, fallback) {
     if (!window.KM_i18n) return fallback || key;
@@ -80,104 +76,7 @@
     });
   }
 
-  /* ============== 3. 檔案上傳 ============== */
-  function initFileUpload() {
-    const zone = document.getElementById('uploadZone');
-    const input = document.getElementById('fileInput');
-    const list = document.getElementById('fileList');
-    if (!zone || !input || !list) return;
-
-    // 我們自己管理檔案 (因為 input.files 不可直接刪除)
-    const selectedFiles = [];
-
-    function renderList() {
-      list.innerHTML = '';
-      if (!selectedFiles.length) return;
-
-      selectedFiles.forEach((file, idx) => {
-        const row = document.createElement('div');
-        row.style.cssText = 'display:flex; justify-content:space-between; align-items:center; padding:9px 12px; background:#fff; border:0.5px solid var(--color-line); font-size:12px; margin-bottom:6px;';
-        row.innerHTML = `
-          <span style="overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:75%;">
-            <strong>${escapeHtml(file.name)}</strong>
-            <span style="color:var(--color-text-muted); margin-left:6px;">${formatSize(file.size)}</span>
-          </span>
-          <button type="button" data-idx="${idx}" style="color:#C8503E; font-size:11px;">×</button>
-        `;
-        list.appendChild(row);
-      });
-
-      list.querySelectorAll('button[data-idx]').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const i = parseInt(btn.getAttribute('data-idx'), 10);
-          selectedFiles.splice(i, 1);
-          syncInput();
-          renderList();
-        });
-      });
-    }
-
-    function syncInput() {
-      // 把 selectedFiles 同步回 <input type="file">
-      const dt = new DataTransfer();
-      selectedFiles.forEach(f => dt.items.add(f));
-      input.files = dt.files;
-    }
-
-    function addFiles(fileList) {
-      const incoming = Array.from(fileList);
-      for (const f of incoming) {
-        if (selectedFiles.length >= MAX_FILES) {
-          alert(`最多 ${MAX_FILES} 個檔案 / Max ${MAX_FILES} files`);
-          break;
-        }
-        const ext = (f.name.split('.').pop() || '').toLowerCase();
-        if (!ALLOWED_EXT.includes(ext)) {
-          alert(`不支援的檔案格式：${f.name}`);
-          continue;
-        }
-        if (f.size > MAX_FILE_SIZE) {
-          alert(`檔案過大 (>25MB)：${f.name}`);
-          continue;
-        }
-        selectedFiles.push(f);
-      }
-      syncInput();
-      renderList();
-    }
-
-    zone.addEventListener('click', () => input.click());
-
-    input.addEventListener('change', (e) => {
-      addFiles(e.target.files);
-    });
-
-    // 拖曳
-    ['dragenter', 'dragover'].forEach(ev => {
-      zone.addEventListener(ev, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zone.style.borderColor = 'var(--color-accent)';
-      });
-    });
-    ['dragleave', 'drop'].forEach(ev => {
-      zone.addEventListener(ev, (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        zone.style.borderColor = '';
-      });
-    });
-    zone.addEventListener('drop', (e) => {
-      if (e.dataTransfer && e.dataTransfer.files) addFiles(e.dataTransfer.files);
-    });
-  }
-
-  function formatSize(bytes) {
-    if (bytes < 1024) return bytes + ' B';
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
-    return (bytes / 1024 / 1024).toFixed(1) + ' MB';
-  }
-
+  /* ============== 3. 共用工具 ============== */
   function escapeHtml(s) {
     return String(s).replace(/[&<>"']/g, c => ({
       '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -196,6 +95,7 @@
       quantity: 'Quantity',
       deadline: 'Deadline',
       note: 'Notes',
+      channel_note: 'Channel Note',
       message: 'Message'
     };
     const lines = [
@@ -206,10 +106,6 @@
 
     for (const [key, value] of fd.entries()) {
       if (key.startsWith('_') || key === 'services[]') continue;
-      if (value instanceof File) {
-        if (value.name) lines.push(`File: ${value.name} (${formatSize(value.size)})`);
-        continue;
-      }
       const text = String(value || '').trim();
       if (!text) continue;
       lines.push(`${fieldLabels[key] || key}: ${text}`);
@@ -412,7 +308,6 @@
   function init() {
     initMobileMenu();
     initFormStepper();
-    initFileUpload();
     initQuoteForm();
     initSmoothScroll();
     initProjectPhotoGrids();
