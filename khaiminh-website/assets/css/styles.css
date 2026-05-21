@@ -185,6 +185,7 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
 .lang-switch button.active { color: var(--color-text); font-weight: 500; }
 .lang-switch button:hover { color: var(--color-accent-dark); }
 .lang-switch button:disabled { cursor: wait; opacity: 0.7; }
+.mobile-lang-switch { display: none; }
 
 .btn-primary {
   background: var(--color-accent);
@@ -1049,7 +1050,7 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
   .stats-grid { padding: 0 20px; }
   .form-stepper-inner { padding: 0 20px; }
 
-  .nav, .lang-switch, .hero-cta .btn-secondary, .header .btn-primary { display: none; }
+  .nav, .header-inner > .lang-switch:not(.mobile-lang-switch), .hero-cta .btn-secondary, .header .btn-primary { display: none; }
   .menu-toggle { display: flex; }
 
   .hero { padding: 48px 0 32px; }
@@ -1103,6 +1104,15 @@ input, textarea, select { font-family: inherit; font-size: 14px; }
     border-bottom: 0.5px solid var(--color-line);
   }
   .nav.open a { padding: 6px 0; border-bottom: 0.5px solid var(--color-line); }
+  .nav.open .mobile-lang-switch {
+    display: flex;
+    width: 100%;
+    border-left: 0;
+    border-top: 0.5px solid var(--color-line);
+    padding: 12px 0 0;
+    margin-top: 2px;
+    justify-content: flex-start;
+  }
 }
 
 @media (max-width: 480px) {
