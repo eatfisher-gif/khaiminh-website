@@ -370,12 +370,52 @@
   }
 
   /* ============== 啟動 ============== */
+  function initProjectPhotoGrids() {
+    const grids = document.querySelectorAll('.project-photo-grid[data-case-category]');
+    if (!grids.length) return;
+
+    fetch('assets/case-manifest.json?v=20260521-3', { cache: 'no-store' })
+      .then(res => (res.ok ? res.json() : null))
+      .then(manifest => {
+        if (!manifest || typeof manifest !== 'object') return;
+
+        grids.forEach(grid => {
+          const category = grid.getAttribute('data-case-category');
+          const images = manifest[category] && Array.isArray(manifest[category].images)
+            ? manifest[category].images.slice(0, 4)
+            : [];
+          if (!images.length) return;
+
+          grid.innerHTML = '';
+          grid.classList.toggle('project-photo-grid--placeholder', images.length < 4);
+
+          images.forEach((src, idx) => {
+            const img = document.createElement('img');
+            img.src = src;
+            img.alt = `${category} project photo ${idx + 1}`;
+            img.loading = 'lazy';
+            grid.appendChild(img);
+          });
+
+          for (let i = images.length; i < 4; i += 1) {
+            const fallback = document.createElement('div');
+            fallback.className = 'project-photo-fallback';
+            grid.appendChild(fallback);
+          }
+        });
+      })
+      .catch(err => {
+        console.warn('[cases] failed to load case manifest:', err);
+      });
+  }
+
   function init() {
     initMobileMenu();
     initFormStepper();
     initFileUpload();
     initQuoteForm();
     initSmoothScroll();
+    initProjectPhotoGrids();
   }
 
   if (document.readyState === 'loading') {
